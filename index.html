@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="thumbs/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="thumbs/favicon-16x16.png">
     <link rel="manifest" href="thumbs/site.webmanifest">
-    <title>Vdonin's Personal Page</title>
+    <title>Aleksei Vdonin</title>
     <style>
         /* Сброс стилей по умолчанию */
         * {
@@ -24,7 +24,7 @@
                 sans-serif;
             line-height: 1.6;
             color: #333;
-            background-color: #f9f9f9;
+            background-color: #fcfdfe;
         }
 
         a {
@@ -121,6 +121,7 @@
             height: 300px;
             object-fit: cover;
             border-radius: 50%;
+            object-position: 35% center;
         }
 
         #about .about-text {
@@ -146,6 +147,31 @@
         }
 
         #skills li::before {
+            content: "✔";
+            color: #007bff;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Секция "Образование" */
+        #education {
+            margin-bottom: 2rem;
+        }
+
+        #education ul {
+            list-style: none;
+            columns: 2;
+            /* Две колонки для списка */
+            column-gap: 2rem;
+        }
+
+        #education li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.2rem;
+        }
+
+        #education li::before {
             content: "✔";
             color: #007bff;
             position: absolute;
@@ -179,9 +205,19 @@
             margin-bottom: 0.5rem;
         }
 
+        .project-card h5 {
+            color: #666;
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
         .project-card p {
             font-size: 0.9rem;
             color: #666;
+        }
+
+        .project-card ul {
+            padding-left: 1.5rem;
         }
 
         .project-card a {
@@ -279,10 +315,8 @@
     <section class="hero">
         <h2>Привет, я&nbsp;Алексей&nbsp;Вдонин</h2>
         <p>
-            Аналитик-разработчик и дата-саентист.
-            Спасибо, что зашли на мой личный сайт!
-            Ниже Вы найдете мою биографию, список навыков, проектов и контакты.
-            Давайте&nbsp;знакомиться!
+            Аналитик-разработчик + ML-engineer<br />
+            Рад видеть Вас на моём личном сайте!<br>
         </p>
     </section>
 
@@ -290,12 +324,12 @@
         <div class="container">
             <!-- Обо мне -->
             <section id="about">
-                <img src="./DSC05758.jpg" alt="Мое фото" />
+                <img src="./main_photo.jpg" alt="Мое фото" />
                 <div class="about-text">
                     <h2>Обо мне</h2>
                     <p>
-                        Я занимаюсь аналитикой и разработкой: пишу SQL-запросы, код, строю дашборды, анализирую их и
-                        активно применяю машинное обучение в своей работе. Независимо от задачи, я всегда стремлюсь
+                        Я занимаюсь аналитикой и ML-разработкой: пишу SQL-запросы, код, обучаю классификаторы, 
+                        оцениваю их качество и эффект от их внедрения. Независимо от задачи, я всегда стремлюсь
                         найти оптимальное решение как с точки зрения эффективности, так и алгоритмической сложности. Для
                         меня главное не количество выполненных задач, а их качество.
                     </p>
@@ -308,7 +342,7 @@
                 <ul>
                     <li>Python, C++</li>
                     <li>SQL</li>
-                    <li>ML, DL</li>
+                    <li>Classic ML, DL (NLP, CV)</li>
                     <li>Анализ данных</li>
                     <li>Алгоритмы и структуры данных</li>
                     <li>CI/CD (GitLab, Proprietary Solutions)</li>
@@ -317,41 +351,62 @@
                 </ul>
             </section>
 
+            <!-- Образование -->
+            <section id="education">
+                <h2>Образование</h2>
+                <ul>
+                    <li>г. Москва, НИУ ВШЭ, Факультет компьютерных наук, Прикладная математика и информатика</li>
+                    <li>Бакалавриат, 2022-2026</li>
+                </ul>
+            </section>
+            <br>
+
             <!-- Проекты -->
             <section id="projects">
-                <h2>Проекты</h2>
+                <h2>Опыт работы + Проекты</h2>
                 <div class="projects-grid">
                     <!-- Карточка проекта 1 -->
                     <div class="project-card">
-                        <h4>Аналитик-разработчик в Яндексе</h4>
+                        <h4>Аналитик-разработчик в команде этики Яндекс Алисы</h4>
+                        <h5><i>Текущая позиция</i></h5>
                         <p>
-                            Разработан и внедрен алгоритм классификации на основе
-                            LLM, который уменьшил затраты человеческих
-                            ресурсов на 15%
+                        <ul>
+                            <li>Разработаны и внедрены этические классификаторы для повышения базового качества ответов Алисы</li>
+                            <li>Проведены приемки новых базовых моделей, оценена этичность их ответов посредством передовых методов</li>
+                            <li>Активно внедрены LLM в существующие процессы, что позволило существенно сократить расходы человеко-часов</li>
+                            <li>Сделано множество переиспользуемых инструментов и материалов</li>
+                        </ul>
                         </p>
+                        <h5><i><br>*Все задачи описаны максимально абстрактно для строгого соблюдения NDA, я не разглашаю ничего, что даже потенциально может под него подпадать</i></h5>
                         <a href="https://t.me/vdoninav" target="_blank">Связаться со мной</a>
                     </div>
                     <!-- Карточка проекта 2 -->
                     <div class="project-card">
-                        <h4>Real Estate Analysis</h4>
+                        <h4>Распознавание и суммаризация документов в мобильном приложении HSE App X</h4>
+                        <h5><i>Один из лучших проектов ПМИ 2025</i></h5>
                         <p>
-                            Проведен анализ стоимости жилья в различных
-                            ценовых сегментах в зависимости от факторов, влияющих на
-                            стоимость
+                        <ul>
+                            <li>Разработаны и обучены суммаризаторы на основе самописных архитектур (вкл. RNN + Attention) для внедрения в официальное приложение НИУ ВШЭ HSE App X и систему электронного документооборота НИУ ВШЭ</li>
+                            <li>Архитектуры разработаны специально для работы в условиях сверх ограниченных ресурсов - инференс за адекватное время на CPU (несколько архитектур для разных SLA)</li>
+                            <li>Данный проект был выбран в качестве одного из лучших проектов студентов ПМИ ФКН НИУ ВШЭ за 2025 г</li>
+                        </ul>
                         </p>
-                        <a href="https://github.com/vdoninav/real_estate_analysis" target="_blank">GitHub</a>
-                        <a href="https://vdoninav-real-estate-analysis.streamlit.app/" target="_blank"> WebApp</a>
+                        <a href="https://github.com/vdoninav/hse_ocr_summ" target="_blank">GitHub</a>
+                        <a href="https://cs.hse.ru/cppr/best_projects/hse_app_document_ai" target="_blank"> HSE Best Project</a>
+                        <a href="https://drive.google.com/file/d/15s1vvJh0rRfqZ_qWpkAo9C-Rkl1l--Nh/view" target="_blank"> Report</a>
                     </div>
                     <!-- Карточка проекта 3 -->
                     <div class="project-card">
-                        <h4>Исследование уголовных дел с помощью NER (Named Entity Recognition)</h4>
-                        <p>
-                            Разработано веб-приложение на основе ML для извлечения
-                            ключевых слов из текстов судебных решений по статье 105 ч.1 УК
-                            РФ «Убийство»
-                        </p>
-                        <a href="https://github.com/vdoninav/hse_criminal_cases/" target="_blank">GitHub</a>
-                        <a href="https://hse-criminal-cases.streamlit.app/" target="_blank"> WebApp</a>
+                        <h4>Стажировка в группе исследования новых методов ИБ в Яндекс Такси</h4>
+                        <h5><i>Первый индустриальный опыт</i></h5>
+                        <ul>
+                            <li>Разработан и внедрен алгоритм классификации на основе LLM, который уменьшил затраты человеческих ресурсов на 15%</li>
+                            <li>Применены передовые алгоритмы для решения задач дедупликации на основе BERT и графов</li>
+                            <li>Осуществлялась поддержка и оптимизация существующих бизнес-процессов</li>
+                        </ul>
+                        <!-- <a href="https://t.me/vdoninav" target="_blank">Связаться со мной</a> -->
+                        <!-- <a href="https://github.com/vdoninav/hse_criminal_cases/" target="_blank">GitHub</a>
+                        <a href="https://hse-criminal-cases.streamlit.app/" target="_blank"> WebApp</a> -->
                     </div>
                 </div>
             </section>
