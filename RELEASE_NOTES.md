@@ -1,4 +1,4 @@
-# Release Notes v1.3 - October 10, 2025
+# Release Notes v1.35 - October 10, 2025
 
 ## Overview
 This release adds enhanced navigation, expands the education section with additional achievements, and adds a second row of project cards to showcase more work.
@@ -23,13 +23,15 @@ This release adds enhanced navigation, expands the education section with additi
 - **Section title updated**: Changed from "Проекты" to "Деятельность" in navigation for broader scope
 
 #### Project 4 - Criminal Cases NER Research
-- Named Entity Recognition (NER) research project analyzing criminal cases
-- Includes placeholder descriptions (to be filled)
+- BERT-based model trained for extracting keywords from court decision texts for specific articles
+- Interactive web application deployed for easy use
+- Includes one remaining placeholder description
 - Links to GitHub repository and deployed WebApp
 
 #### Project 5 - Real Estate Analysis
-- Primitive dataset analysis with hypothesis formulation and visual verification
-- User-friendly web application deployed on Streamlit with interactive graphs
+- Analysis of housing prices across different price segments based on factors affecting cost
+- Basic dataset analysis with hypothesis formulation and verification using graphs
+- User-friendly web application deployed on Streamlit with interactive visualizations
 - Links to GitHub repository and deployed WebApp
 
 #### Project 6 - "Словарь ударений" Extension
