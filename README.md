@@ -1,4 +1,4 @@
-# Vdonin's Personal Page
+# Aleksei Vdonin's personal page
 
 Личный одностраничный сайт для самопрезентации.
 
