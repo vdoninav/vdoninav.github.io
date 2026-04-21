@@ -719,7 +719,38 @@
             <span class="meta"><em class="grad-text">Vdonin</em>.com</span>
         </div>
     </footer>
-    <!-- Scrollspy script goes in Task 11 -->
+    <script>
+        (function () {
+            var sections = document.querySelectorAll('section[id]');
+            var links = document.querySelectorAll('.site-header nav a[href^="#"]');
+            if (!sections.length || !links.length || !('IntersectionObserver' in window)) return;
+
+            var linkById = {};
+            links.forEach(function (a) {
+                var id = a.getAttribute('href').slice(1);
+                linkById[id] = a;
+            });
+
+            var setActive = function (id) {
+                links.forEach(function (a) {
+                    a.classList.remove('active');
+                    a.removeAttribute('aria-current');
+                });
+                if (linkById[id]) {
+                    linkById[id].classList.add('active');
+                    linkById[id].setAttribute('aria-current', 'location');
+                }
+            };
+
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) setActive(entry.target.id);
+                });
+            }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+
+            sections.forEach(function (s) { observer.observe(s); });
+        })();
+    </script>
 </body>
 
 </html>
