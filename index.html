@@ -59,6 +59,31 @@
             *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
         }
 
+        /* ===== Header (sticky) ===== */
+        .site-header {
+            position: sticky; top: 0; z-index: 50;
+            background: rgba(13, 17, 23, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #fff;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .site-header .container {
+            display: flex; justify-content: space-between; align-items: center;
+            padding-top: 0.9rem; padding-bottom: 0.9rem;
+        }
+        .site-header .logotype { font-size: 1.2rem; font-weight: 500; }
+        .site-header .logotype em { font-style: italic; }
+        .site-header nav ul { display: flex; gap: 1.25rem; font-size: 0.9rem; font-weight: 500; }
+        .site-header nav a { color: #cbd5e1; transition: color 0.15s, border-color 0.15s; padding-bottom: 2px; border-bottom: 2px solid transparent; }
+        .site-header nav a:hover { color: #fff; }
+        .site-header nav a.active { color: #fff; border-bottom-color: #7c3aed; }
+        @media (max-width: 800px) {
+            .site-header .container { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+            .site-header nav ul { gap: 0.9rem; font-size: 0.78rem; }
+            .site-header .logotype { font-size: 1rem; }
+        }
+
         /* ===== Responsive breakpoints ===== */
         @media (max-width: 800px) {
             .container { padding: 0 1.25rem; }
@@ -69,7 +94,19 @@
 </head>
 
 <body>
-    <!-- Header goes in Task 2 -->
+    <header class="site-header">
+        <div class="container">
+            <div class="logotype"><em class="grad-text">Vdonin</em>.com</div>
+            <nav>
+                <ul>
+                    <li><a href="#skills">Навыки</a></li>
+                    <li><a href="#education">Образование</a></li>
+                    <li><a href="#projects">Деятельность</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
     <!-- Hero goes in Task 3 -->
     <!-- Main with sections goes in Tasks 4-9 -->
     <!-- Footer goes in Task 10 -->
