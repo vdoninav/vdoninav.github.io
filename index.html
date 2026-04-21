@@ -128,6 +128,36 @@
             .hero .name-line { font-size: 1rem; }
         }
 
+        /* ===== About ===== */
+        .about { padding: 3rem 0; background: #fafbfc; }
+        .about .container {
+            display: grid; grid-template-columns: auto 1fr;
+            gap: 2.25rem; align-items: center;
+        }
+        .about .photo-ring {
+            padding: 8px; border-radius: 50%;
+            background: linear-gradient(135deg, rgba(124,58,237,0.35), rgba(8,145,178,0.35));
+        }
+        .about .photo {
+            width: 240px; height: 240px; border-radius: 50%;
+            object-fit: cover; object-position: 35% center;
+            box-shadow: 0 10px 30px rgba(15,23,42,0.12);
+        }
+        .about h2 { font-size: 1.75rem; margin-bottom: 0.75rem; letter-spacing: -0.02em; }
+        .about p { color: #334155; line-height: 1.65; max-width: 640px; }
+        .about .tag-row { margin-top: 1rem; display: flex; gap: 8px; flex-wrap: wrap; }
+        .about .tag-row .t {
+            background: #fff; border: 1px solid #e2e8f0;
+            border-radius: 999px; padding: 4px 12px;
+            font-size: 0.78rem; color: #475569; font-weight: 500;
+        }
+        @media (max-width: 800px) {
+            .about .container { grid-template-columns: 1fr; text-align: center; gap: 1.25rem; }
+            .about .photo { width: 180px; height: 180px; }
+            .about p { margin: 0 auto; }
+            .about .tag-row { justify-content: center; }
+        }
+
         /* ===== Responsive breakpoints ===== */
         @media (max-width: 800px) {
             .container { padding: 0 1.25rem; }
@@ -163,7 +193,29 @@
             <a class="cta" href="https://t.me/vdoninav" target="_blank" rel="noopener">Связаться со мной <span aria-hidden="true">→</span></a>
         </div>
     </section>
-    <!-- Main with sections goes in Tasks 4-9 -->
+    <main>
+        <section class="about">
+            <div class="container">
+                <div class="photo-ring">
+                    <img class="photo" src="main_photo.jpg" alt="Алексей Вдонин" />
+                </div>
+                <div class="about-text">
+                    <h2>Обо мне</h2>
+                    <p>Я занимаюсь аналитикой и ML-разработкой: пишу SQL-запросы, код, обучаю классификаторы, оцениваю их качество и эффект от их внедрения. Независимо от задачи, я всегда стремлюсь найти оптимальное решение как с точки зрения эффективности, так и алгоритмической сложности.</p>
+                    <div class="tag-row">
+                        <span class="t">Python · C++</span>
+                        <span class="t">Classic ML · DL</span>
+                        <span class="t">NLP · CV</span>
+                        <span class="t">SQL · YTsaurus</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Skills section goes in Task 5 -->
+        <!-- Education section goes in Task 6 -->
+        <!-- Work + Projects section goes in Tasks 7 + 8 -->
+        <!-- Contacts section goes in Task 9 -->
+    </main>
     <!-- Footer goes in Task 10 -->
     <!-- Scrollspy script goes in Task 11 -->
 </body>
