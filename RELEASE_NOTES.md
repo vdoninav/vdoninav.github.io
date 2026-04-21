@@ -1,3 +1,33 @@
+# Release Notes v2.0 — April 21, 2026
+
+## Overview
+Full visual redesign around a "bold gradient" aesthetic. All content preserved except the explicit edits listed below. Deployment model unchanged: still a single-file static site on GitHub Pages.
+
+## Main Changes
+
+### New visual language
+- Primary gradient: purple (#7c3aed) → blue (#2563eb) → cyan (#0891b2), applied to hero title, the logo wordmark, category labels, and achievement bullets.
+- Soft radial background blobs in the hero section (purple, cyan, pink) for depth.
+- Sticky dark header with backdrop-blur; scrollspy highlights the active section.
+- System font stack, all icons inlined as SVG — zero external requests.
+
+### Content updates
+- **Hero** rewritten. Role is now only "ML-engineer" (dropped "Аналитик-разработчик +"). Name "Алексей Вдонин" moved to a preamble line above the role, in the gradient accent color.
+- **Current position** updated to "Разработчик-исследователь в команде Машинного обучения и Антиспама" and featured in a dark-gradient hero card.
+- **Previous Yandex Alice role** preserved intact but demoted to "Предыдущая позиция".
+- **Skills** reorganized into 4 categories (Языки, ML/DL, Базы данных, Инфраструктура). Dropped: "Анализ данных", "Алгоритмы и структуры данных", "Remote Servers".
+- **Education** split into an HSE main card and a Достижения card with gradient-square bullets.
+- **Projects section** split into two labelled sub-sections: "Опыт работы" (3) and "Проекты" (4). HSE App X moved from work to projects.
+- **Contacts** redesigned as 4 icon-forward cards with real brand SVGs (Email envelope, Telegram, GitHub, LinkedIn).
+- **Footer** copyright year bumped 2025 → 2026.
+
+## Technical Details
+- Single `index.html`, one inline `<style>` block, one small `<script>` (~30 lines, IntersectionObserver scrollspy that toggles `.active` class and `aria-current="location"`).
+- Responsive breakpoints at 800px and 520px.
+- Honors `prefers-reduced-motion`.
+
+---
+
 # Release Notes v1.4 - October 12, 2025
 
 ## Overview

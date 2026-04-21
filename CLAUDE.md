@@ -30,10 +30,11 @@ Supporting files:
 
 ## Content Conventions
 
-- **Language:** user-facing copy is in **Russian**. Match the existing tone (first person, professional) when editing. Comments inside `index.html` are also in Russian — keep them consistent.
-- **Project cards** (`#projects > .projects-grid > .project-card`) follow a fixed structure: `<h4>` title, optional `<h5><i>` subtitle, `<ul>` of bullets, then one or more `<a target="_blank">` links. New cards should replicate this structure so the grid stays visually uniform.
-- **NDA notice on card 1:** the first project card carries an explicit NDA disclaimer ("*Все задачи описаны максимально абстрактно для строгого соблюдения NDA..."). Do not add specifics about the Yandex/Alice work beyond what is already abstracted there.
-- Rows of projects are separated by a bare `<br>` between `.projects-grid` divs — matches the existing visual rhythm.
+- **Language:** user-facing copy is in **Russian**. Match the existing tone (first person, professional) when editing. Comments inside `index.html` are in a mix of Russian and English — keep them consistent.
+- **Design system:** primary gradient is `linear-gradient(135deg, #7c3aed 0%, #2563eb 45%, #0891b2 100%)`, applied via the `.grad-text` utility class. Cards use `.feat-card` (dark gradient, for the featured/current-position card) or `.reg-card` (white with a 3px gradient left-edge bar).
+- **Projects area:** lives under one `<section id="projects">` with nav label "Деятельность". Inside there are two labelled sub-sections — "Опыт работы" and "Проекты" — each with its own count pill. The current position gets the `.feat-card` treatment; everything else uses `.reg-card`.
+- **NDA notice** currently lives on the "Предыдущая позиция" card (Аналитик-разработчик в команде этики Яндекс Алисы). Do not add Alice-specific details beyond what's already abstracted there.
+- **Icons:** inline SVG only — no external icon libraries, no web fonts. Skill-category icons are 18×18 stroke SVGs; brand icons in Контакты use the real marks from simple-icons.org (GitHub, Telegram, LinkedIn) + a Feather-style envelope for Email. All decorative SVGs must have `aria-hidden="true"`.
 
 ## Release Workflow
 
