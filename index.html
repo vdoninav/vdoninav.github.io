@@ -10,484 +10,70 @@
     <link rel="manifest" href="thumbs/site.webmanifest">
     <title>Aleksei Vdonin</title>
     <style>
-        /* Сброс стилей по умолчанию */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* ===== Reset ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* Общие стили */
+        /* ===== Base ===== */
+        html { scroll-behavior: smooth; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-                Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
-                sans-serif;
+                Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background-color: #fcfdfe;
+            color: #0f172a;
+            background: #ffffff;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: inherit; text-decoration: none; }
+        ul { list-style: none; }
+        img { display: block; max-width: 100%; }
+        section { scroll-margin-top: 72px; }
+
+        /* ===== Shared utility: gradient text ===== */
+        .grad-text {
+            background: linear-gradient(135deg, #7c3aed 0%, #2563eb 45%, #0891b2 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
-        a {
-            color: #007bff;
-            text-decoration: none;
+        /* ===== Section headers (reused across sections) ===== */
+        .sec { padding: 3rem 0; }
+        .sec-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 1.25rem; }
+        .sec-head h2 { font-size: 1.75rem; color: #0f172a; letter-spacing: -0.02em; font-weight: 700; }
+        .sec-head .count {
+            font-size: 0.7rem; font-weight: 700; color: #64748b;
+            background: #f1f5f9; padding: 3px 10px; border-radius: 999px;
+            letter-spacing: 0.05em;
+        }
+        .sec-head .rule { flex: 1; height: 1px; background: linear-gradient(90deg, #e2e8f0, transparent); }
+
+        /* ===== Container ===== */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+        /* ===== Main backdrop below hero ===== */
+        main { background: #fafbfc; }
+
+        /* ===== Reduced-motion ===== */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
         }
 
-        a:hover {
-            text-decoration: underline;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4 {
-            margin-bottom: 0.5em;
-        }
-
-        /* Шапка сайта */
-        header {
-            background-color: #0d1117;
-            /* тёмный фон */
-            color: #fff;
-            /* светлый текст */
-            padding: 1rem;
-        }
-
-        header .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        header h1 {
-            font-size: 1.5rem;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 1rem;
-        }
-
-        nav ul li a {
-            color: #fff;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: #ddd;
-        }
-
-        /* Блок hero (приветственный экран) */
-        .hero {
-            background: linear-gradient(to right, #007bff, #00bcd4);
-            color: #fff;
-            padding: 3rem 1rem;
-            text-align: center;
-        }
-
-        .hero h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.125rem;
-            max-width: 600px;
-            margin: 0.5rem auto;
-        }
-
-        /* Основной контейнер */
-        main .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        /* Секция "Обо мне" */
-        #about {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        #about img {
-            flex: 0 0 300px;
-            width: 300px;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 50%;
-            object-position: 35% center;
-        }
-
-        #about .about-text {
-            flex: 1;
-        }
-
-        /* Секция "Навыки" */
-        #skills {
-            margin-bottom: 2rem;
-        }
-
-        #skills ul {
-            list-style: none;
-            columns: 2;
-            /* Две колонки для списка */
-            column-gap: 2rem;
-        }
-
-        #skills li {
-            margin-bottom: 0.5rem;
-            position: relative;
-            padding-left: 1.2rem;
-        }
-
-        #skills li::before {
-            content: "✔";
-            color: #007bff;
-            position: absolute;
-            left: 0;
-        }
-
-        /* Секция "Образование" */
-        #education {
-            margin-bottom: 2rem;
-        }
-
-        #education ul {
-            list-style: none;
-            columns: 2;
-            /* Две колонки для списка */
-            column-gap: 2rem;
-        }
-
-        #education li {
-            margin-bottom: 0.5rem;
-            position: relative;
-            padding-left: 1.2rem;
-        }
-
-        #education li::before {
-            content: "✔";
-            color: #007bff;
-            position: absolute;
-            left: 0;
-        }
-
-        /* Секция "Проекты" */
-        #projects {
-            margin-bottom: 2rem;
-        }
-
-        #projects .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-        }
-
-        .project-card {
-            background-color: #fff;
-            border-radius: 6px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            padding: 1rem;
-            transition: transform 0.3s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .project-card h4 {
-            margin-bottom: 0.5rem;
-        }
-
-        .project-card h5 {
-            color: #666;
-            font-weight: normal;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-card p {
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        .project-card ul {
-            padding-left: 1.5rem;
-        }
-
-        .project-card a {
-            display: inline-block;
-            margin-top: 0.5rem;
-            color: #007bff;
-        }
-
-        .project-card a:not(:last-child) {
-            margin-right: 1em;
-        }
-
-        /* Секция "Контакты" */
-        #contact {
-            margin-bottom: 2rem;
-        }
-
-        #contact .contact-info {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-
-        .contact-card {
-            background-color: #fff;
-            border-radius: 6px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            flex: 1;
-            padding: 1rem;
-        }
-
-        .contact-card h4 {
-            margin-bottom: 0.5rem;
-        }
-
-        .contact-card p {
-            font-size: 0.9rem;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        /* Подвал (footer) */
-        footer {
-            background-color: #0d1117;
-            color: #fff;
-            padding: 1rem;
-            text-align: center;
-        }
-
-        /* Адаптивность (медиа-запросы) */
-        @media (max-width: 768px) {
-            header .container {
-                flex-direction: column;
-            }
-
-            nav ul {
-                margin-top: 1rem;
-            }
-
-            #about {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            #about img {
-                margin-bottom: 1rem;
-            }
-
-            #skills ul {
-                columns: 1;
-                /* В мобильном виде одна колонка */
-            }
+        /* ===== Responsive breakpoints ===== */
+        @media (max-width: 800px) {
+            .container { padding: 0 1.25rem; }
+            .sec { padding: 2rem 0; }
+            .sec-head h2 { font-size: 1.4rem; }
         }
     </style>
 </head>
 
 <body>
-
-    <!-- Шапка сайта -->
-    <header>
-        <div class="container">
-            <h1><em>Vdonin</em>.com</h1>
-            <nav>
-                <ul>
-                    <!-- <li><a href="#about">Обо мне</a></li> -->
-                    <li><a href="#skills">Навыки</a></li>
-                    <li><a href="#education">Образование</a></li>
-                    <li><a href="#projects">Деятельность</a></li>
-                    <li><a href="#contact">Контакты</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Блок Hero -->
-    <section class="hero">
-        <h2>Привет, я&nbsp;Алексей&nbsp;Вдонин</h2>
-        <p>
-            Аналитик-разработчик + ML-engineer<br />
-            Рад видеть Вас на моём личном сайте!<br>
-        </p>
-    </section>
-
-    <main>
-        <div class="container">
-            <!-- Обо мне -->
-            <section id="about">
-                <img src="./main_photo.jpg" alt="Мое фото" />
-                <div class="about-text">
-                    <h2>Обо мне</h2>
-                    <p>
-                        Я занимаюсь аналитикой и ML-разработкой: пишу SQL-запросы, код, обучаю классификаторы, 
-                        оцениваю их качество и эффект от их внедрения. Независимо от задачи, я всегда стремлюсь
-                        найти оптимальное решение как с точки зрения эффективности, так и алгоритмической сложности.
-                    </p>
-                </div>
-            </section>
-
-            <!-- Навыки -->
-            <section id="skills">
-                <h2>Навыки</h2>
-                <ul>
-                    <li>Python, C++</li>
-                    <li>SQL</li>
-                    <li>Classic ML, DL (NLP, CV)</li>
-                    <li>Анализ данных</li>
-                    <li>Алгоритмы и структуры данных</li>
-                    <li>CI/CD (GitLab, Proprietary Solutions)</li>
-                    <li>YTsaurus, PostgreSQL</li>
-                    <li>Linux, CLI, Remote Servers</li>
-                </ul>
-            </section>
-
-            <!-- Образование -->
-            <section id="education">
-                <h2>Образование</h2>
-                <ul>
-                    <li>г. Москва, НИУ ВШЭ, ФКН, Прикладная математика и информатика, специализация Машинное обучение и приложения</li>
-                    <li>Бакалавриат, 2022-2026</li>
-                    <li>Участник ICPC</li>
-                    <li>Участник заключительного этапа ВСОШ по физике</li>
-                    <li>Золотой медалист Международной олимпиады по экспериментальной физике (IEPhO)</li>
-                    <li>Призер множества олимпиад по физике и математике</li>
-                </ul>
-            </section>
-            <br>
-
-            <!-- Проекты -->
-            <section id="projects">
-                <h2>Опыт работы + Проекты</h2>
-                <div class="projects-grid">
-                    <!-- Карточка проекта 1 -->
-                    <div class="project-card">
-                        <h4>Аналитик-разработчик в команде этики Яндекс Алисы</h4>
-                        <h5><i>Текущая позиция</i></h5>
-                        <p>
-                        <ul>
-                            <li>Разработаны и внедрены этические классификаторы для повышения базового качества ответов Алисы</li>
-                            <li>Проведены приемки новых базовых моделей, оценена этичность их ответов посредством передовых методов</li>
-                            <li>Активно внедрены LLM в существующие процессы, что позволило существенно сократить расходы человеко-часов</li>
-                            <li>Сделано множество переиспользуемых инструментов и материалов</li>
-                        </ul>
-                        </p>
-                        <h5><i><br>*Все задачи описаны максимально абстрактно для строгого соблюдения NDA, я не разглашаю ничего, что даже потенциально может под него подпадать</i></h5>
-                        <a href="https://t.me/vdoninav" target="_blank">Связаться со мной</a>
-                    </div>
-                    <!-- Карточка проекта 2 -->
-                    <div class="project-card">
-                        <h4>Распознавание и суммаризация документов в мобильном приложении HSE App X</h4>
-                        <h5><i>Один из лучших проектов ПМИ 2025</i></h5>
-                        <p>
-                        <ul>
-                            <li>Разработаны и обучены суммаризаторы на основе самописных архитектур (вкл. RNN + Attention) для внедрения в официальное приложение НИУ ВШЭ HSE App X и систему электронного документооборота НИУ ВШЭ</li>
-                            <li>Архитектуры разработаны специально для работы в условиях сверх ограниченных ресурсов - инференс за адекватное время на CPU (несколько архитектур для разных SLA)</li>
-                            <li>Данный проект был выбран в качестве одного из лучших проектов среди студентов ПМИ ФКН НИУ ВШЭ за 2025 г</li>
-                        </ul>
-                        </p>
-                        <a href="https://github.com/vdoninav/hse_ocr_summ" target="_blank">GitHub</a>
-                        <a href="https://cs.hse.ru/cppr/best_projects/hse_app_document_ai" target="_blank"> HSE Best Project</a>
-                        <a href="https://drive.google.com/file/d/15s1vvJh0rRfqZ_qWpkAo9C-Rkl1l--Nh/view" target="_blank"> Report</a>
-                    </div>
-                    <!-- Карточка проекта 3 -->
-                    <div class="project-card">
-                        <h4>Стажировка в группе исследования новых методов ИБ в Яндекс Такси</h4>
-                        <h5><i>Первый индустриальный опыт</i></h5>
-                        <ul>
-                            <li>Разработан и внедрен алгоритм классификации на основе LLM, который уменьшил затраты человеческих ресурсов на 15%</li>
-                            <li>Применены передовые алгоритмы для решения задач дедупликации на основе BERT и графов</li>
-                            <li>Осуществлялась поддержка и оптимизация существующих бизнес-процессов</li>
-                        </ul>
-                    </div>
-                </div>
-                <br>
-                <div class="projects-grid">
-                    <!-- Карточка проекта 4 -->
-                    <div class="project-card">
-                        <h4>Исследование уголовных дел с помощью NER (Named Entity Recognition)</h4>
-                        <!-- <h5><i></i></h5> -->
-                        <p>
-                        <ul>
-                            <li>Обучена модель на основе BERT для извлечения ключевых слов из текстов судебных решений по определенной статье</li>
-                            <li>Развернуто интерактивное веб-приложение для удобства использования</li>
-                            <!-- <li></li> -->
-                        </ul>
-                        </p>
-                        <a href="https://github.com/vdoninav/hse_criminal_cases/" target="_blank">GitHub</a>
-                        <a href="https://hse-criminal-cases.streamlit.app/" target="_blank"> WebApp</a>
-                    </div>
-                    <!-- Карточка проекта 5 -->
-                    <div class="project-card">
-                        <h4>Real Estate Analysis</h4>
-                        <!-- <h5><i>Описание проекта 5</i></h5> -->
-                        <p>
-                        <ul>
-                            <li>Проведен анализ стоимости жилья в различных ценовых сегментах в зависимости от факторов, потенциально влияющих на стоимость</li>
-                            <!-- <li>Базовый анализ датасета, постановка гипотезы, её проверка на основе графиков</li> -->
-                            <li>Развернуто веб-приложение на Streamlit, сделан user-friendly интерфейс, нарисованы графики</li>
-                        </ul>
-                        </p>
-
-                        <a href="https://github.com/vdoninav/real_estate_analysis?tab=readme-ov-file" target="_blank">GitHub</a>
-                        <a href="https://vdoninav-real-estate-analysis.streamlit.app/" target="_blank"> WebApp</a>
-                    </div>
-                    <!-- Карточка проекта 6 -->
-                    <div class="project-card">
-                        <h4>Расширение «Словарь ударений»</h4>
-                        <!-- <h5><i>Описание проекта 6</i></h5> -->
-                        <p>
-                        <ul>
-                            <li>Написано расширение для браузера Chrome, которое автоматически подсвечивает русские слова на веб-страницах и показывает нормативное ударение во всплывающей подсказке</li>
-                            <li>Полностью open-source, добавляется и нативно работает с Google Chrome</li>
-                            <!-- <li>Инструкция по установке в README на GitHub</li> -->
-                        </ul>
-                        </p>
-                        <a href="https://github.com/vdoninav/stress_spotter_extension" target="_blank">GitHub</a>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Контакты -->
-            <section id="contact">
-                <h2>Контакты</h2>
-                <div class="contact-info">
-                    <div class="contact-card">
-                        <h4>Email</h4>
-                        <p><a href="mailto:aleksei@vdonin.com" target="_blank">aleksei@vdonin.com</a></p>
-                    </div>
-                    <div class="contact-card">
-                        <h4>GitHub</h4>
-                        <p><a href="https://github.com/vdoninav" target="_blank">github.com/vdoninav</a></p>
-                    </div>
-                    <div class="contact-card">
-                        <h4>Telegram</h4>
-                        <p><a href="https://t.me/vdoninav" target="_blank">@vdoninav</a></p>
-                    </div>
-                    <div class="contact-card">
-                        <h4>LinkedIn</h4>
-                        <p><a href="https://www.linkedin.com/in/vdoninav/" target="_blank">
-                                linkedin.com/in/vdoninav/
-                            </a></p>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <!-- Подвал сайта -->
-    <footer>
-        <p>&copy; Вдонин А.В., 2025. Все права защищены.</p>
-    </footer>
+    <!-- Header goes in Task 2 -->
+    <!-- Hero goes in Task 3 -->
+    <!-- Main with sections goes in Tasks 4-9 -->
+    <!-- Footer goes in Task 10 -->
+    <!-- Scrollspy script goes in Task 11 -->
 </body>
 
 </html>
