@@ -49,6 +49,7 @@ A single utility class `.grad-text` applies the primary gradient to text via `-w
 - **Stack:** unchanged from current site — `-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif`.
 - **Display (hero role):** `5rem / 800 / -0.04em` desktop, `2.8rem` mobile.
 - **Section headings (h2):** `1.75rem / 700 / -0.02em`.
+- **Featured-card title (h3):** `1.35rem / 700 / -0.01em`, white on the dark gradient.
 - **Card titles (h4):** `1.02rem / 700`, explicit color `#0f172a`.
 - **Category labels (uppercase):** `0.75rem / 700 / letter-spacing 0.08em`, color `#7c3aed`.
 - **Body:** `1rem / 1.65` for prose, `0.88rem` for card bodies.
@@ -85,7 +86,7 @@ Single-page scroll, anchor-driven nav (same pattern as today). Sections in order
 3. **About / Обо мне** — informally co-located with hero, not a nav target
 4. **Skills** — `#skills` — nav label "Навыки"
 5. **Education** — `#education` — nav label "Образование"
-6. **Work + Projects** — `#work` — nav label "Деятельность" (one nav item, two visually-distinct sub-sections inside)
+6. **Work + Projects** — `#projects` — nav label "Деятельность" (one nav item, two visually-distinct sub-sections inside). Anchor name `#projects` is preserved from the current site for link-compat.
 7. **Contacts** — `#contact` — nav label "Контакты"
 8. **Footer**
 
@@ -157,7 +158,7 @@ Two stacked cards.
   - Золотой медалист IEPhO (Международная олимпиада по экспериментальной физике)
   - Призёр множества олимпиад по физике и математике
 
-### Work + Projects / Деятельность (#work)
+### Work + Projects / Деятельность (#projects)
 
 Two labelled sub-sections sharing one nav anchor.
 
