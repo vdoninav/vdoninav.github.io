@@ -84,6 +84,50 @@
             .site-header .logotype { font-size: 1rem; }
         }
 
+        /* ===== Hero ===== */
+        .hero {
+            position: relative; overflow: hidden;
+            padding: 4rem 0 4.5rem;
+            text-align: center;
+            background: #ffffff;
+        }
+        .hero .blob { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(6px); }
+        .hero .blob-purple { width: 420px; height: 420px; background: radial-gradient(circle, #a78bfa 0%, transparent 70%); top: -140px; right: -120px; opacity: 0.45; }
+        .hero .blob-cyan { width: 360px; height: 360px; background: radial-gradient(circle, #22d3ee 0%, transparent 70%); bottom: -160px; left: -120px; opacity: 0.35; }
+        .hero .blob-pink { width: 260px; height: 260px; background: radial-gradient(circle, #f0abfc 0%, transparent 70%); top: 30%; left: 40%; opacity: 0.18; filter: blur(4px); }
+        .hero .container { position: relative; z-index: 2; }
+        .hero .eyebrow {
+            font-size: 0.82rem; color: #64748b; letter-spacing: 0.14em;
+            text-transform: uppercase; margin-bottom: 0.75rem; font-weight: 600;
+        }
+        .hero .name-line {
+            font-size: 1.15rem; font-weight: 500; color: #475569;
+            margin-bottom: 0.5rem;
+        }
+        .hero .name-line .grad-text { font-weight: 600; }
+        .hero h1.role {
+            font-size: 5rem; font-weight: 800; letter-spacing: -0.04em;
+            line-height: 1; margin-bottom: 1.25rem;
+        }
+        .hero .greeting {
+            font-size: 1rem; color: #475569; max-width: 480px;
+            margin: 0 auto 1.75rem; line-height: 1.5;
+        }
+        .hero .cta {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #0f172a; color: #fff;
+            border-radius: 10px; padding: 12px 20px;
+            font-size: 0.92rem; font-weight: 600;
+            box-shadow: 0 8px 24px rgba(15,23,42,0.18);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .hero .cta:hover { transform: translateY(-1px); box-shadow: 0 12px 28px rgba(15,23,42,0.22); }
+        @media (max-width: 800px) {
+            .hero { padding: 3rem 0 3.25rem; }
+            .hero h1.role { font-size: 2.8rem; }
+            .hero .name-line { font-size: 1rem; }
+        }
+
         /* ===== Responsive breakpoints ===== */
         @media (max-width: 800px) {
             .container { padding: 0 1.25rem; }
@@ -107,7 +151,18 @@
             </nav>
         </div>
     </header>
-    <!-- Hero goes in Task 3 -->
+    <section class="hero">
+        <div class="blob blob-purple"></div>
+        <div class="blob blob-cyan"></div>
+        <div class="blob blob-pink"></div>
+        <div class="container">
+            <div class="eyebrow">Привет</div>
+            <p class="name-line">Меня зовут <span class="grad-text">Алексей Вдонин</span>, я&nbsp;—</p>
+            <h1 class="role grad-text">ML-engineer</h1>
+            <p class="greeting">Рад видеть Вас на моём личном сайте</p>
+            <a class="cta" href="https://t.me/vdoninav" target="_blank" rel="noopener">Связаться со мной <span aria-hidden="true">→</span></a>
+        </div>
+    </section>
     <!-- Main with sections goes in Tasks 4-9 -->
     <!-- Footer goes in Task 10 -->
     <!-- Scrollspy script goes in Task 11 -->
