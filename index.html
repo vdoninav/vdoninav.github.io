@@ -403,6 +403,21 @@
         @media (max-width: 800px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
         @media (max-width: 520px) { .contact-grid { grid-template-columns: 1fr; } }
 
+        /* ===== Footer ===== */
+        .site-footer {
+            background: #0d1117; color: #9da3ad;
+            padding: 1.5rem 0;
+            font-size: 0.82rem;
+        }
+        .site-footer .container {
+            display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+        }
+        .site-footer .meta { color: #64748b; font-size: 0.78rem; }
+        .site-footer .meta em { font-style: italic; }
+        @media (max-width: 520px) {
+            .site-footer .container { flex-direction: column; text-align: center; }
+        }
+
         /* ===== Responsive breakpoints ===== */
         @media (max-width: 800px) {
             .container { padding: 0 1.25rem; }
@@ -416,7 +431,7 @@
     <header class="site-header">
         <div class="container">
             <div class="logotype"><em class="grad-text">Vdonin</em>.com</div>
-            <nav>
+            <nav aria-label="Основная навигация">
                 <ul>
                     <li><a href="#skills">Навыки</a></li>
                     <li><a href="#education">Образование</a></li>
@@ -698,7 +713,12 @@
             </div>
         </section>
     </main>
-    <!-- Footer goes in Task 10 -->
+    <footer class="site-footer">
+        <div class="container">
+            <span>© Вдонин А.В., 2026. Все права защищены.</span>
+            <span class="meta"><em class="grad-text">Vdonin</em>.com</span>
+        </div>
+    </footer>
     <!-- Scrollspy script goes in Task 11 -->
 </body>
 
