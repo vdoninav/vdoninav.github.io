@@ -246,6 +246,127 @@
             .edu-awards ul { grid-template-columns: 1fr; }
         }
 
+        /* ===== Work + Projects (shared) ===== */
+        .work-projects { padding-bottom: 3rem; }
+        .subsection-head { display: flex; align-items: baseline; gap: 12px; margin: 1.5rem 0 1rem; }
+        .subsection-head h3 { font-size: 1.25rem; color: #0f172a; font-weight: 700; letter-spacing: -0.01em; }
+        .subsection-head .count {
+            font-size: 0.7rem; font-weight: 700; color: #64748b;
+            background: #f1f5f9; padding: 3px 10px; border-radius: 999px; letter-spacing: 0.05em;
+        }
+        .subsection-head .rule { flex: 1; height: 1px; background: linear-gradient(90deg, #e2e8f0, transparent); }
+
+        /* Featured dark-gradient hero card */
+        .feat-card {
+            position: relative; overflow: hidden;
+            background: linear-gradient(135deg, #1e1b4b 0%, #0c4a6e 60%, #164e63 100%);
+            color: #fff; border-radius: 14px;
+            padding: 1.75rem 1.75rem 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+        .feat-card::before {
+            content: ''; position: absolute;
+            width: 320px; height: 320px; border-radius: 50%;
+            background: radial-gradient(circle, #a78bfa, transparent 70%);
+            top: -120px; right: -80px; opacity: 0.5;
+        }
+        .feat-card::after {
+            content: ''; position: absolute;
+            width: 240px; height: 240px; border-radius: 50%;
+            background: radial-gradient(circle, #22d3ee, transparent 70%);
+            bottom: -80px; left: -60px; opacity: 0.4;
+        }
+        .feat-card > * { position: relative; z-index: 2; }
+        .feat-card .badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(255,255,255,0.14);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 999px; padding: 4px 12px;
+            font-size: 0.72rem; font-weight: 600;
+            letter-spacing: 0.06em; text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+        .feat-card .badge .pulse {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: #6ee7b7;
+            box-shadow: 0 0 0 0 rgba(110,231,183, 0.6);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(110,231,183, 0.6); }
+            70% { box-shadow: 0 0 0 8px rgba(110,231,183, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(110,231,183, 0); }
+        }
+        .feat-card h3 {
+            font-size: 1.35rem; font-weight: 700;
+            letter-spacing: -0.01em; line-height: 1.25;
+            margin-bottom: 0.75rem; color: #fff;
+        }
+        .feat-card .body {
+            font-size: 1rem; line-height: 1.6;
+            color: rgba(255,255,255,0.9);
+            max-width: 760px; margin-bottom: 1rem;
+        }
+        .feat-card .links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .feat-card .links a {
+            font-size: 0.88rem; font-weight: 600;
+            padding: 8px 16px; border-radius: 8px;
+            background: #fff; color: #1e1b4b;
+            border: 1px solid #fff;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .feat-card .links a:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+
+        /* Regular card (used in work + projects) */
+        .reg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .reg-card {
+            position: relative; overflow: hidden;
+            background: #fff; border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.1rem 1.25rem;
+        }
+        .reg-card::before {
+            content: ''; position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #7c3aed, #0891b2);
+        }
+        .reg-card.variant-proj::before { background: linear-gradient(180deg, #22d3ee, #7c3aed); }
+        .reg-card h4 {
+            font-size: 1.02rem; font-weight: 700;
+            color: #0f172a; line-height: 1.3;
+            letter-spacing: -0.01em; margin-bottom: 0.3rem;
+        }
+        .reg-card .sub {
+            color: #7c3aed; font-size: 0.8rem;
+            font-style: italic; font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .reg-card .body { color: #334155; line-height: 1.55; font-size: 0.9rem; }
+        .reg-card .body ul { padding-left: 1.1rem; margin: 0; list-style: disc; }
+        .reg-card .body li { margin-bottom: 0.3rem; color: #334155; }
+        .reg-card .nda {
+            display: block; margin-top: 0.6rem;
+            font-size: 0.72rem; color: #94a3b8;
+            font-style: italic; line-height: 1.4;
+        }
+        .reg-card .links { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 0.6rem; }
+        .reg-card .links a {
+            font-size: 0.76rem; font-weight: 600;
+            padding: 4px 10px; border-radius: 6px;
+            background: #f1f5f9; color: #0f172a;
+            border: 1px solid #e2e8f0;
+            transition: background 0.15s, border-color 0.15s;
+        }
+        .reg-card .links a:hover { background: #e2e8f0; border-color: #cbd5e1; }
+
+        @media (max-width: 800px) {
+            .reg-grid { grid-template-columns: 1fr; }
+            .feat-card { padding: 1.4rem 1.25rem 1.25rem; }
+            .feat-card h3 { font-size: 1.15rem; }
+        }
+
         /* ===== Responsive breakpoints ===== */
         @media (max-width: 800px) {
             .container { padding: 0 1.25rem; }
@@ -381,7 +502,58 @@
                 </div>
             </div>
         </section>
-        <!-- Work + Projects section goes in Tasks 7 + 8 -->
+        <section id="projects" class="sec work-projects">
+            <div class="container">
+                <div class="sec-head">
+                    <h2>Деятельность</h2>
+                    <span class="count">Опыт + проекты</span>
+                    <span class="rule"></span>
+                </div>
+
+                <!-- Опыт работы -->
+                <div class="subsection-head">
+                    <h3>Опыт работы</h3>
+                    <span class="count">3</span>
+                    <span class="rule"></span>
+                </div>
+
+                <div class="feat-card">
+                    <span class="badge"><span class="pulse"></span>Текущая позиция</span>
+                    <h3>Разработчик-исследователь в команде Машинного обучения и Антиспама</h3>
+                    <p class="body">Занимаюсь полным циклом выкатки моделей - от сбора датасета до обучения и инференса. Разрабатываю архитектуры, подбираю подходящие решения под них, обсуждаю и внедряю передовые технологии.</p>
+                    <div class="links">
+                        <a href="https://t.me/vdoninav" target="_blank" rel="noopener">Связаться со мной →</a>
+                    </div>
+                </div>
+
+                <div class="reg-grid">
+                    <div class="reg-card">
+                        <h4>Аналитик-разработчик в команде этики Яндекс Алисы</h4>
+                        <div class="sub">Предыдущая позиция</div>
+                        <div class="body">
+                            <ul>
+                                <li>Разработаны и внедрены этические классификаторы для повышения базового качества ответов Алисы</li>
+                                <li>Проведены приемки новых базовых моделей, оценена этичность их ответов посредством передовых методов</li>
+                                <li>Активно внедрены LLM в существующие процессы, что позволило существенно сократить расходы человеко-часов</li>
+                                <li>Сделано множество переиспользуемых инструментов и материалов</li>
+                            </ul>
+                        </div>
+                        <span class="nda">*Все задачи описаны максимально абстрактно для строгого соблюдения NDA, я не разглашаю ничего, что даже потенциально может под него подпадать</span>
+                    </div>
+                    <div class="reg-card">
+                        <h4>Стажировка в группе исследования новых методов ИБ в Яндекс Такси</h4>
+                        <div class="sub">Первый индустриальный опыт</div>
+                        <div class="body">
+                            <ul>
+                                <li>Разработан и внедрен алгоритм классификации на основе LLM, который уменьшил затраты человеческих ресурсов на 15%</li>
+                                <li>Применены передовые алгоритмы для решения задач дедупликации на основе BERT и графов</li>
+                                <li>Осуществлялась поддержка и оптимизация существующих бизнес-процессов</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Проекты will be added in Task 8, right after this comment -->
         <!-- Contacts section goes in Task 9 -->
     </main>
     <!-- Footer goes in Task 10 -->
