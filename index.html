@@ -183,6 +183,69 @@
         }
         @media (max-width: 520px) { .skills-grid { grid-template-columns: 1fr; } }
 
+        /* ===== Education ===== */
+        .edu-main {
+            background: linear-gradient(135deg, #eef2ff 0%, #ecfeff 100%);
+            border: 1px solid #c7d2fe;
+            border-radius: 14px;
+            padding: 1.5rem 1.75rem;
+            margin-bottom: 1rem;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 1.25rem;
+        }
+        .edu-main .emblem {
+            width: 56px; height: 56px; border-radius: 12px;
+            background: linear-gradient(135deg, #7c3aed, #0891b2);
+            color: #fff; display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em;
+        }
+        .edu-main h4 { font-size: 1.05rem; color: #0f172a; margin-bottom: 0.25rem; }
+        .edu-main p { color: #475569; font-size: 0.88rem; line-height: 1.5; }
+        .edu-main .dates {
+            font-size: 0.78rem; color: #1e1b4b;
+            background: rgba(255,255,255,0.7);
+            border: 1px solid rgba(124,58,237,0.25);
+            padding: 4px 12px; border-radius: 999px;
+            font-weight: 600; white-space: nowrap;
+        }
+        .edu-awards {
+            background: #fff; border: 1px solid #e2e8f0;
+            border-radius: 12px; padding: 1.1rem 1.25rem;
+        }
+        .edu-awards .cat-label {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 0.75rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.08em;
+            color: #7c3aed; margin-bottom: 0.85rem;
+        }
+        .edu-awards .cat-label svg {
+            width: 18px; height: 18px;
+            stroke: #7c3aed; fill: none;
+            stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+        }
+        .edu-awards ul {
+            padding: 0; margin: 0;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 1.25rem;
+        }
+        .edu-awards li {
+            font-size: 0.9rem; color: #334155;
+            padding-left: 1.25rem; position: relative; line-height: 1.5;
+        }
+        .edu-awards li::before {
+            content: ''; position: absolute; left: 0; top: 0.6em;
+            width: 7px; height: 7px; border-radius: 2px;
+            background: linear-gradient(135deg, #7c3aed, #0891b2);
+        }
+        @media (max-width: 800px) {
+            .edu-main { grid-template-columns: auto 1fr; }
+            .edu-main .dates { grid-column: 1 / -1; justify-self: start; }
+        }
+        @media (max-width: 520px) {
+            .edu-awards ul { grid-template-columns: 1fr; }
+        }
+
         /* ===== Responsive breakpoints ===== */
         @media (max-width: 800px) {
             .container { padding: 0 1.25rem; }
@@ -289,7 +352,35 @@
                 </div>
             </div>
         </section>
-        <!-- Education section goes in Task 6 -->
+        <section id="education" class="sec">
+            <div class="container">
+                <div class="sec-head">
+                    <h2>Образование</h2>
+                    <span class="count">НИУ ВШЭ</span>
+                    <span class="rule"></span>
+                </div>
+                <div class="edu-main">
+                    <div class="emblem">ВШЭ</div>
+                    <div>
+                        <h4>НИУ ВШЭ, ФКН — Прикладная математика и информатика</h4>
+                        <p>г. Москва · специализация «Машинное обучение и приложения» · Бакалавриат</p>
+                    </div>
+                    <span class="dates">2022 — 2026</span>
+                </div>
+                <div class="edu-awards">
+                    <div class="cat-label">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 L14.5 9 L22 9.3 L16 14 L18 22 L12 17.5 L6 22 L8 14 L2 9.3 L9.5 9 Z"/></svg>
+                        <span>Достижения</span>
+                    </div>
+                    <ul>
+                        <li>Участник ICPC</li>
+                        <li>Участник заключительного этапа ВСОШ по физике</li>
+                        <li>Золотой медалист IEPhO (Международная олимпиада по экспериментальной физике)</li>
+                        <li>Призёр множества олимпиад по физике и математике</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
         <!-- Work + Projects section goes in Tasks 7 + 8 -->
         <!-- Contacts section goes in Task 9 -->
     </main>
