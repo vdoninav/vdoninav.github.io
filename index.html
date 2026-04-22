@@ -10,299 +10,973 @@
     <link rel="manifest" href="thumbs/site.webmanifest">
     <title>Aleksei Vdonin</title>
     <style>
-        /* Сброс стилей по умолчанию */
-        * {
+        /* ===== Reset ===== */
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Общие стили */
+        /* ===== Base ===== */
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-                Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
-                sans-serif;
+                Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background-color: #fcfdfe;
+            color: #0f172a;
+            background: #ffffff;
+            -webkit-font-smoothing: antialiased;
         }
 
         a {
-            color: #007bff;
+            color: inherit;
             text-decoration: none;
         }
 
-        a:hover {
-            text-decoration: underline;
+        ul {
+            list-style: none;
         }
 
-        h1,
-        h2,
-        h3,
-        h4 {
-            margin-bottom: 0.5em;
+        img {
+            display: block;
+            max-width: 100%;
         }
 
-        /* Шапка сайта */
-        header {
-            background-color: #0d1117;
-            /* тёмный фон */
-            color: #fff;
-            /* светлый текст */
-            padding: 1rem;
+        section {
+            scroll-margin-top: 72px;
         }
 
-        header .container {
-            max-width: 1200px;
+        /* ===== Shared utility: gradient text ===== */
+        .grad-text {
+            background: linear-gradient(135deg, #7c3aed 0%, #2563eb 45%, #0891b2 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* ===== Section headers (reused across sections) ===== */
+        .sec {
+            padding: 3rem 0;
+        }
+
+        .sec-head {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 1.25rem;
+        }
+
+        .sec-head h2 {
+            font-size: 1.75rem;
+            color: #0f172a;
+            letter-spacing: -0.02em;
+            font-weight: 700;
+        }
+
+        .sec-head .count {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #64748b;
+            background: #f1f5f9;
+            padding: 3px 10px;
+            border-radius: 999px;
+            letter-spacing: 0.05em;
+        }
+
+        .sec-head .rule {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, #e2e8f0, transparent);
+        }
+
+        /* ===== Container ===== */
+        .container {
+            max-width: 1100px;
             margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ===== Main backdrop below hero ===== */
+        main {
+            background: #fafbfc;
+        }
+
+        /* ===== Reduced-motion ===== */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.001ms !important;
+                transition-duration: 0.001ms !important;
+            }
+        }
+
+        /* ===== Header (sticky) ===== */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(13, 17, 23, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #fff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .site-header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding-top: 0.9rem;
+            padding-bottom: 0.9rem;
         }
 
-        header h1 {
-            font-size: 1.5rem;
+        .site-header .logotype {
+            font-size: 1.2rem;
+            font-weight: 500;
         }
 
-        nav ul {
-            list-style: none;
+        .site-header .logotype em {
+            font-style: italic;
+        }
+
+        .site-header nav ul {
             display: flex;
+            gap: 1.25rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .site-header nav a {
+            color: #cbd5e1;
+            transition: color 0.15s, border-color 0.15s;
+            padding-bottom: 2px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .site-header nav a:hover {
+            color: #fff;
+        }
+
+        .site-header nav a.active {
+            color: #fff;
+            border-bottom-color: #7c3aed;
+        }
+
+        .site-header nav a:focus-visible,
+        .hero .cta:focus-visible,
+        .feat-card .links a:focus-visible,
+        .reg-card .links a:focus-visible,
+        .contact-card:focus-visible {
+            outline: 2px solid #7c3aed;
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 800px) {
+            .site-header .container {
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+            }
+
+            .site-header nav ul {
+                gap: 0.9rem;
+                font-size: 0.78rem;
+            }
+
+            .site-header .logotype {
+                font-size: 1rem;
+            }
+        }
+
+        /* ===== Hero ===== */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 4rem 0 4.5rem;
+            text-align: center;
+            background: #ffffff;
+        }
+
+        .hero .blob {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(6px);
+        }
+
+        .hero .blob-purple {
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle, #a78bfa 0%, transparent 70%);
+            top: -140px;
+            right: -120px;
+            opacity: 0.45;
+        }
+
+        .hero .blob-cyan {
+            width: 360px;
+            height: 360px;
+            background: radial-gradient(circle, #22d3ee 0%, transparent 70%);
+            bottom: -160px;
+            left: -120px;
+            opacity: 0.35;
+        }
+
+        .hero .blob-pink {
+            width: 260px;
+            height: 260px;
+            background: radial-gradient(circle, #f0abfc 0%, transparent 70%);
+            top: 30%;
+            left: 40%;
+            opacity: 0.18;
+            filter: blur(4px);
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero .eyebrow {
+            font-size: 0.82rem;
+            color: #64748b;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .hero .name-line {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: #475569;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero .name-line .grad-text {
+            font-weight: 600;
+        }
+
+        .hero h1.role {
+            font-size: 5rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero .greeting {
+            font-size: 1rem;
+            color: #475569;
+            max-width: 480px;
+            margin: 0 auto 1.75rem;
+            line-height: 1.5;
+        }
+
+        .hero .cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #0f172a;
+            color: #fff;
+            border-radius: 10px;
+            padding: 12px 20px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.18);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .hero .cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.22);
+        }
+
+        @media (max-width: 800px) {
+            .hero {
+                padding: 3rem 0 3.25rem;
+            }
+
+            .hero h1.role {
+                font-size: 2.8rem;
+            }
+
+            .hero .name-line {
+                font-size: 1rem;
+            }
+        }
+
+        /* ===== About ===== */
+        .about {
+            padding: 3rem 0;
+            background: #fafbfc;
+        }
+
+        .about .container {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 2.25rem;
+            align-items: center;
+        }
+
+        .about .photo-ring {
+            padding: 8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.35), rgba(8, 145, 178, 0.35));
+        }
+
+        .about .photo {
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: 35% center;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+        }
+
+        .about h2 {
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .about p {
+            color: #334155;
+            line-height: 1.65;
+        }
+
+        .about .tag-row {
+            margin-top: 1rem;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .about .tag-row .t {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 999px;
+            padding: 4px 12px;
+            font-size: 0.78rem;
+            color: #475569;
+            font-weight: 500;
+        }
+
+        @media (max-width: 800px) {
+            .about .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 1.25rem;
+            }
+
+            .about .photo {
+                width: 180px;
+                height: 180px;
+            }
+
+            .about p {
+                margin: 0 auto;
+            }
+
+            .about .tag-row {
+                justify-content: center;
+            }
+        }
+
+        /* ===== Skills ===== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 1rem;
         }
 
-        nav ul li a {
-            color: #fff;
+        .skill-cat {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.1rem 1.25rem;
+        }
+
+        .skill-cat .cat-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #7c3aed;
+            margin-bottom: 0.85rem;
+        }
+
+        .skill-cat .cat-label svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            stroke: #7c3aed;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .skill-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .skill-pills .pill {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            color: #0f172a;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.82rem;
             font-weight: 500;
-            transition: color 0.3s;
         }
 
-        nav ul li a:hover {
-            color: #ddd;
+        @media (max-width: 520px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-        /* Блок hero (приветственный экран) */
-        .hero {
-            background: linear-gradient(to right, #007bff, #00bcd4);
+        /* ===== Education ===== */
+        .edu-main {
+            background: linear-gradient(135deg, #eef2ff 0%, #ecfeff 100%);
+            border: 1px solid #c7d2fe;
+            border-radius: 14px;
+            padding: 1.5rem 1.75rem;
+            margin-bottom: 1rem;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .edu-main .emblem {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #7c3aed, #0891b2);
             color: #fff;
-            padding: 3rem 1rem;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: -0.02em;
         }
 
-        .hero h2 {
-            font-size: 2rem;
+        .edu-main h4 {
+            font-size: 1.05rem;
+            color: #0f172a;
+            margin-bottom: 0.25rem;
+        }
+
+        .edu-main p {
+            color: #475569;
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        .edu-main .dates {
+            font-size: 0.78rem;
+            color: #1e1b4b;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(124, 58, 237, 0.25);
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .edu-awards {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.1rem 1.25rem;
+        }
+
+        .edu-awards .cat-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #7c3aed;
+            margin-bottom: 0.85rem;
+        }
+
+        .edu-awards .cat-label svg {
+            width: 18px;
+            height: 18px;
+            stroke: #7c3aed;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .edu-awards ul {
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem 1.25rem;
+        }
+
+        .edu-awards li {
+            font-size: 0.9rem;
+            color: #334155;
+            padding-left: 1.25rem;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .edu-awards li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6em;
+            width: 7px;
+            height: 7px;
+            border-radius: 2px;
+            background: linear-gradient(135deg, #7c3aed, #0891b2);
+        }
+
+        @media (max-width: 800px) {
+            .edu-main {
+                grid-template-columns: auto 1fr;
+            }
+
+            .edu-main .dates {
+                grid-column: 1 / -1;
+                justify-self: start;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .edu-awards ul {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== Work + Projects (shared) ===== */
+        .work-projects {
+            padding-bottom: 3rem;
+        }
+
+        .subsection-head {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .subsection-head h3 {
+            font-size: 1.25rem;
+            color: #0f172a;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .subsection-head .count {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #64748b;
+            background: #f1f5f9;
+            padding: 3px 10px;
+            border-radius: 999px;
+            letter-spacing: 0.05em;
+        }
+
+        .subsection-head .rule {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, #e2e8f0, transparent);
+        }
+
+        /* Featured dark-gradient hero card */
+        .feat-card {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1e1b4b 0%, #0c4a6e 60%, #164e63 100%);
+            color: #fff;
+            border-radius: 14px;
+            padding: 1.75rem 1.75rem 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .feat-card::before {
+            content: '';
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #a78bfa, transparent 70%);
+            top: -120px;
+            right: -80px;
+            opacity: 0.5;
+        }
+
+        .feat-card::after {
+            content: '';
+            position: absolute;
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #22d3ee, transparent 70%);
+            bottom: -80px;
+            left: -60px;
+            opacity: 0.4;
+        }
+
+        .feat-card>* {
+            position: relative;
+            z-index: 2;
+        }
+
+        .feat-card .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.14);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 999px;
+            padding: 4px 12px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .feat-card .badge .pulse {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #6ee7b7;
+            box-shadow: 0 0 0 0 rgba(110, 231, 183, 0.6);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(110, 231, 183, 0.6);
+            }
+
+            70% {
+                box-shadow: 0 0 0 8px rgba(110, 231, 183, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(110, 231, 183, 0);
+            }
+        }
+
+        .feat-card h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            line-height: 1.25;
+            margin-bottom: 0.75rem;
+            color: #fff;
+        }
+
+        .feat-card .body {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 760px;
             margin-bottom: 1rem;
         }
 
-        .hero p {
-            font-size: 1.125rem;
-            max-width: 600px;
-            margin: 0.5rem auto;
-        }
-
-        /* Основной контейнер */
-        main .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        /* Секция "Обо мне" */
-        #about {
+        .feat-card .links {
             display: flex;
+            gap: 8px;
             flex-wrap: wrap;
-            gap: 2rem;
-            align-items: center;
-            margin-bottom: 2rem;
         }
 
-        #about img {
-            flex: 0 0 300px;
-            width: 300px;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 50%;
-            object-position: 35% center;
+        .feat-card .links a {
+            font-size: 0.88rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: #fff;
+            color: #1e1b4b;
+            border: 1px solid #fff;
+            transition: transform 0.15s, box-shadow 0.15s;
         }
 
-        #about .about-text {
-            flex: 1;
+        .feat-card .links a:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
-        /* Секция "Навыки" */
-        #skills {
-            margin-bottom: 2rem;
-        }
-
-        #skills ul {
-            list-style: none;
-            columns: 2;
-            /* Две колонки для списка */
-            column-gap: 2rem;
-        }
-
-        #skills li {
-            margin-bottom: 0.5rem;
-            position: relative;
-            padding-left: 1.2rem;
-        }
-
-        #skills li::before {
-            content: "✔";
-            color: #007bff;
-            position: absolute;
-            left: 0;
-        }
-
-        /* Секция "Образование" */
-        #education {
-            margin-bottom: 2rem;
-        }
-
-        #education ul {
-            list-style: none;
-            columns: 2;
-            /* Две колонки для списка */
-            column-gap: 2rem;
-        }
-
-        #education li {
-            margin-bottom: 0.5rem;
-            position: relative;
-            padding-left: 1.2rem;
-        }
-
-        #education li::before {
-            content: "✔";
-            color: #007bff;
-            position: absolute;
-            left: 0;
-        }
-
-        /* Секция "Проекты" */
-        #projects {
-            margin-bottom: 2rem;
-        }
-
-        #projects .projects-grid {
+        /* Regular card (used in work + projects) */
+        .reg-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: 1rem;
         }
 
-        .project-card {
-            background-color: #fff;
-            border-radius: 6px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            padding: 1rem;
-            transition: transform 0.3s;
+        .reg-card {
+            position: relative;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.1rem 1.25rem;
         }
 
-        .project-card:hover {
-            transform: translateY(-5px);
+        .reg-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #7c3aed, #0891b2);
         }
 
-        .project-card h4 {
+        .reg-card.variant-proj::before {
+            background: linear-gradient(180deg, #22d3ee, #7c3aed);
+        }
+
+        .reg-card h4 {
+            font-size: 1.02rem;
+            font-weight: 700;
+            color: #0f172a;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.3rem;
+        }
+
+        .reg-card .sub {
+            color: #7c3aed;
+            font-size: 0.8rem;
+            font-style: italic;
+            font-weight: 600;
             margin-bottom: 0.5rem;
         }
 
-        .project-card h5 {
-            color: #666;
-            font-weight: normal;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-card p {
+        .reg-card .body {
+            color: #334155;
+            line-height: 1.55;
             font-size: 0.9rem;
-            color: #666;
         }
 
-        .project-card ul {
-            padding-left: 1.5rem;
+        .reg-card .body ul {
+            padding-left: 1.1rem;
+            margin: 0;
+            list-style: disc;
         }
 
-        .project-card a {
-            display: inline-block;
-            margin-top: 0.5rem;
-            color: #007bff;
+        .reg-card .body li {
+            margin-bottom: 0.3rem;
+            color: #334155;
         }
 
-        .project-card a:not(:last-child) {
-            margin-right: 1em;
-        }
-
-        /* Секция "Контакты" */
-        #contact {
-            margin-bottom: 2rem;
-        }
-
-        #contact .contact-info {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-
-        .contact-card {
-            background-color: #fff;
-            border-radius: 6px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            flex: 1;
-            padding: 1rem;
-        }
-
-        .contact-card h4 {
-            margin-bottom: 0.5rem;
-        }
-
-        .contact-card p {
-            font-size: 0.9rem;
-            color: #666;
+        .reg-card .nda {
+            display: block;
+            margin-top: 0.6rem;
+            font-size: 0.72rem;
+            color: #94a3b8;
+            font-style: italic;
             line-height: 1.4;
         }
 
-        /* Подвал (footer) */
-        footer {
-            background-color: #0d1117;
-            color: #fff;
-            padding: 1rem;
-            text-align: center;
+        .reg-card .links {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: 0.6rem;
         }
 
-        /* Адаптивность (медиа-запросы) */
-        @media (max-width: 768px) {
-            header .container {
-                flex-direction: column;
+        .reg-card .links a {
+            font-size: 0.76rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: #f1f5f9;
+            color: #0f172a;
+            border: 1px solid #e2e8f0;
+            transition: background 0.15s, border-color 0.15s;
+        }
+
+        .reg-card .links a:hover {
+            background: #e2e8f0;
+            border-color: #cbd5e1;
+        }
+
+        @media (max-width: 800px) {
+            .reg-grid {
+                grid-template-columns: 1fr;
             }
 
-            nav ul {
-                margin-top: 1rem;
+            .feat-card {
+                padding: 1.4rem 1.25rem 1.25rem;
             }
 
-            #about {
+            .feat-card h3 {
+                font-size: 1.15rem;
+            }
+        }
+
+        /* ===== Contacts ===== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .contact-card {
+            position: relative;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.25rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            transition: transform 0.18s, box-shadow 0.18s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
+        }
+
+        .contact-card .icon-wrap {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.4rem;
+            color: #0f172a;
+        }
+
+        .contact-card .icon-wrap svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .contact-card .label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #64748b;
+        }
+
+        .contact-card .value {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #0f172a;
+            word-break: break-all;
+        }
+
+        .contact-card .arrow {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            color: #cbd5e1;
+            font-size: 0.8rem;
+            transition: transform 0.15s, color 0.15s;
+        }
+
+        .contact-card:hover .arrow {
+            transform: translate(2px, -2px);
+            color: #7c3aed;
+        }
+
+        @media (max-width: 800px) {
+            .contact-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== Footer ===== */
+        .site-footer {
+            background: #0d1117;
+            color: #9da3ad;
+            padding: 1.5rem 0;
+            font-size: 0.82rem;
+        }
+
+        .site-footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .site-footer .meta {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .site-footer .meta em {
+            font-style: italic;
+        }
+
+        @media (max-width: 520px) {
+            .site-footer .container {
                 flex-direction: column;
                 text-align: center;
             }
+        }
 
-            #about img {
-                margin-bottom: 1rem;
+        /* ===== Responsive breakpoints ===== */
+        @media (max-width: 800px) {
+            .container {
+                padding: 0 1.25rem;
             }
 
-            #skills ul {
-                columns: 1;
-                /* В мобильном виде одна колонка */
+            .sec {
+                padding: 2rem 0;
+            }
+
+            .sec-head h2 {
+                font-size: 1.4rem;
             }
         }
     </style>
 </head>
 
 <body>
-
-    <!-- Шапка сайта -->
-    <header>
+    <header class="site-header">
         <div class="container">
-            <h1><em>Vdonin</em>.com</h1>
-            <nav>
+            <div class="logotype"><em class="grad-text">Vdonin</em>.com</div>
+            <nav aria-label="Основная навигация">
                 <ul>
-                    <!-- <li><a href="#about">Обо мне</a></li> -->
                     <li><a href="#skills">Навыки</a></li>
                     <li><a href="#education">Образование</a></li>
                     <li><a href="#projects">Деятельность</a></li>
@@ -311,183 +985,386 @@
             </nav>
         </div>
     </header>
-
-    <!-- Блок Hero -->
     <section class="hero">
-        <h2>Привет, я&nbsp;Алексей&nbsp;Вдонин</h2>
-        <p>
-            Аналитик-разработчик + ML-engineer<br />
-            Рад видеть Вас на моём личном сайте!<br>
-        </p>
-    </section>
-
-    <main>
+        <div class="blob blob-purple"></div>
+        <div class="blob blob-cyan"></div>
+        <div class="blob blob-pink"></div>
         <div class="container">
-            <!-- Обо мне -->
-            <section id="about">
-                <img src="./main_photo.jpg" alt="Мое фото" />
+            <div class="eyebrow">Привет</div>
+            <p class="name-line">Меня зовут <span class="grad-text">Алексей Вдонин</span>, я&nbsp;—</p>
+            <h1 class="role grad-text">ML-engineer</h1>
+            <p class="greeting">Рад видеть Вас на моём личном сайте</p>
+            <a class="cta" href="https://t.me/vdoninav" target="_blank" rel="noopener">Связаться со мной <span
+                    aria-hidden="true">→</span></a>
+        </div>
+    </section>
+    <main>
+        <section id="about" class="about">
+            <div class="container">
+                <div class="photo-ring">
+                    <img class="photo" src="main_photo.jpg" alt="Алексей Вдонин" />
+                </div>
                 <div class="about-text">
                     <h2>Обо мне</h2>
-                    <p>
-                        Я занимаюсь аналитикой и ML-разработкой: пишу SQL-запросы, код, обучаю классификаторы, 
-                        оцениваю их качество и эффект от их внедрения. Независимо от задачи, я всегда стремлюсь
-                        найти оптимальное решение как с точки зрения эффективности, так и алгоритмической сложности.
-                    </p>
+                    <p>Я занимаюсь ML-разработкой полного цикла: от сбора и обработки данных до обучения и оптимизации
+                        моделей, проектирования ML-систем и оценки эффекта их внедрения. Вне зависимости от задачи я
+                        стремлюсь находить решения, оптимальные и по практической эффективности, и по вычислительной
+                        сложности.</p>
+                    <div class="tag-row">
+                        <span class="t">Python · C++</span>
+                        <span class="t">Classic ML · DL</span>
+                        <span class="t">NLP · CV</span>
+                        <span class="t">SQL · Hadoop</span>
+                        <span class="t">Jupyter · VS Code</span>
+                        <span class="t">AI · Claude Code</span>
+                    </div>
                 </div>
-            </section>
+            </div>
+        </section>
+        <section id="skills" class="sec">
+            <div class="container">
+                <div class="sec-head">
+                    <h2>Навыки</h2>
+                    <span class="count">4 категории</span>
+                    <span class="rule"></span>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-cat">
+                        <div class="cat-label">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <polyline points="8 6 2 12 8 18" />
+                                <polyline points="16 6 22 12 16 18" />
+                            </svg>
+                            <span>Языки программирования</span>
+                        </div>
+                        <div class="skill-pills">
+                            <span class="pill">Python</span>
+                            <span class="pill">C++</span>
+                            <span class="pill">Claude Code</span>
+                        </div>
+                    </div>
+                    <div class="skill-cat">
+                        <div class="cat-label">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="6" cy="6" r="2" />
+                                <circle cx="6" cy="18" r="2" />
+                                <circle cx="18" cy="12" r="2" />
+                                <path d="M8 6l8 6M8 18l8-6" />
+                            </svg>
+                            <span>ML / DL</span>
+                        </div>
+                        <div class="skill-pills">
+                            <span class="pill">Classic ML</span>
+                            <span class="pill">DL (NLP, CV)</span>
+                            <span class="pill">Jupyter</span>
+                        </div>
+                    </div>
+                    <div class="skill-cat">
+                        <div class="cat-label">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <ellipse cx="12" cy="5" rx="9" ry="3" />
+                                <path d="M3 5v6c0 1.7 4 3 9 3s9-1.3 9-3V5" />
+                                <path d="M3 11v6c0 1.7 4 3 9 3s9-1.3 9-3v-6" />
+                            </svg>
+                            <span>Базы данных</span>
+                        </div>
+                        <div class="skill-pills">
+                            <span class="pill">SQL</span>
+                            <span class="pill">YTsaurus</span>
+                            <span class="pill">PostgreSQL</span>
+                            <span class="pill">S3</span>
+                        </div>
+                    </div>
+                    <div class="skill-cat">
+                        <div class="cat-label">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <rect x="2" y="3" width="20" height="5" rx="1" />
+                                <rect x="2" y="10" width="20" height="5" rx="1" />
+                                <rect x="2" y="17" width="20" height="5" rx="1" />
+                                <circle cx="6" cy="5.5" r=".5" fill="#7c3aed" stroke="none" />
+                                <circle cx="6" cy="12.5" r=".5" fill="#7c3aed" stroke="none" />
+                                <circle cx="6" cy="19.5" r=".5" fill="#7c3aed" stroke="none" />
+                            </svg>
+                            <span>Инфраструктура</span>
+                        </div>
+                        <div class="skill-pills">
+                            <span class="pill">CI/CD (GitLab, Proprietary)</span>
+                            <span class="pill">Linux</span>
+                            <span class="pill">CLI</span>
+                            <span class="pill">Hadoop</span>
+                            <span class="pill">Spark</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="education" class="sec">
+            <div class="container">
+                <div class="sec-head">
+                    <h2>Образование</h2>
+                    <span class="count">НИУ ВШЭ</span>
+                    <span class="rule"></span>
+                </div>
+                <div class="edu-main">
+                    <div class="emblem">ВШЭ</div>
+                    <div>
+                        <h4>НИУ ВШЭ, ФКН — Прикладная математика и информатика</h4>
+                        <p>г. Москва · специализация «Машинное обучение и приложения» · Бакалавриат</p>
+                    </div>
+                    <span class="dates">2022 — 2026</span>
+                </div>
+                <div class="edu-awards">
+                    <div class="cat-label">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 2 L14.5 9 L22 9.3 L16 14 L18 22 L12 17.5 L6 22 L8 14 L2 9.3 L9.5 9 Z" />
+                        </svg>
+                        <span>Достижения</span>
+                    </div>
+                    <ul>
+                        <li>Участник ICPC</li>
+                        <li>Участник заключительного этапа ВСОШ по физике</li>
+                        <li>Золотой медалист IEPhO (Международная олимпиада по экспериментальной физике)</li>
+                        <li>Призёр множества олимпиад по физике и математике</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section id="projects" class="sec work-projects">
+            <div class="container">
+                <div class="sec-head">
+                    <h2>Деятельность</h2>
+                    <span class="count">Опыт + проекты</span>
+                    <span class="rule"></span>
+                </div>
 
-            <!-- Навыки -->
-            <section id="skills">
-                <h2>Навыки</h2>
-                <ul>
-                    <li>Python, C++</li>
-                    <li>SQL</li>
-                    <li>Classic ML, DL (NLP, CV)</li>
-                    <li>Анализ данных</li>
-                    <li>Алгоритмы и структуры данных</li>
-                    <li>CI/CD (GitLab, Proprietary Solutions)</li>
-                    <li>YTsaurus, PostgreSQL</li>
-                    <li>Linux, CLI, Remote Servers</li>
-                </ul>
-            </section>
+                <!-- Опыт работы -->
+                <div class="subsection-head">
+                    <h3>Опыт работы</h3>
+                    <span class="count">3</span>
+                    <span class="rule"></span>
+                </div>
 
-            <!-- Образование -->
-            <section id="education">
-                <h2>Образование</h2>
-                <ul>
-                    <li>г. Москва, НИУ ВШЭ, ФКН, Прикладная математика и информатика, специализация Машинное обучение и приложения</li>
-                    <li>Бакалавриат, 2022-2026</li>
-                    <li>Участник ICPC</li>
-                    <li>Участник заключительного этапа ВСОШ по физике</li>
-                    <li>Золотой медалист Международной олимпиады по экспериментальной физике (IEPhO)</li>
-                    <li>Призер множества олимпиад по физике и математике</li>
-                </ul>
-            </section>
-            <br>
+                <div class="feat-card">
+                    <span class="badge"><span class="pulse"></span>Текущая позиция</span>
+                    <h3>Разработчик-исследователь в команде Машинного обучения и Антиспама</h3>
+                    <p class="body">Занимаюсь полным циклом разработки ML-решений: от сбора и подготовки данных до
+                        обучения, оптимизации, деплоя и инференса моделей. Проектирую архитектуры, выбираю методы и
+                        инструменты под конкретные задачи и внедряю технологии, улучшающие качество, производительность
+                        и надежность решений.</p>
+                    <div class="links">
+                        <a href="https://t.me/vdoninav" target="_blank" rel="noopener">Связаться со мной <span aria-hidden="true">→</span></a>
+                    </div>
+                </div>
 
-            <!-- Проекты -->
-            <section id="projects">
-                <h2>Опыт работы + Проекты</h2>
-                <div class="projects-grid">
-                    <!-- Карточка проекта 1 -->
-                    <div class="project-card">
+                <div class="reg-grid">
+                    <div class="reg-card">
                         <h4>Аналитик-разработчик в команде этики Яндекс Алисы</h4>
-                        <h5><i>Текущая позиция</i></h5>
-                        <p>
-                        <ul>
-                            <li>Разработаны и внедрены этические классификаторы для повышения базового качества ответов Алисы</li>
-                            <li>Проведены приемки новых базовых моделей, оценена этичность их ответов посредством передовых методов</li>
-                            <li>Активно внедрены LLM в существующие процессы, что позволило существенно сократить расходы человеко-часов</li>
-                            <li>Сделано множество переиспользуемых инструментов и материалов</li>
-                        </ul>
-                        </p>
-                        <h5><i><br>*Все задачи описаны максимально абстрактно для строгого соблюдения NDA, я не разглашаю ничего, что даже потенциально может под него подпадать</i></h5>
-                        <a href="https://t.me/vdoninav" target="_blank">Связаться со мной</a>
+                        <div class="sub">Предыдущая позиция</div>
+                        <div class="body">
+                            <ul>
+                                <li>Разработаны и внедрены этические классификаторы для повышения базового качества
+                                    ответов Алисы</li>
+                                <li>Проведены приемки новых базовых моделей, оценена этичность их ответов посредством
+                                    передовых методов</li>
+                                <li>Активно внедрены LLM в существующие процессы, что позволило существенно сократить
+                                    расходы человеко-часов</li>
+                                <li>Сделано множество переиспользуемых инструментов и материалов</li>
+                            </ul>
+                        </div>
+                        <span class="nda">*Все задачи описаны максимально абстрактно для строгого соблюдения NDA, я не
+                            разглашаю ничего, что даже потенциально может под него подпадать</span>
                     </div>
-                    <!-- Карточка проекта 2 -->
-                    <div class="project-card">
-                        <h4>Распознавание и суммаризация документов в мобильном приложении HSE App X</h4>
-                        <h5><i>Один из лучших проектов ПМИ 2025</i></h5>
-                        <p>
-                        <ul>
-                            <li>Разработаны и обучены суммаризаторы на основе самописных архитектур (вкл. RNN + Attention) для внедрения в официальное приложение НИУ ВШЭ HSE App X и систему электронного документооборота НИУ ВШЭ</li>
-                            <li>Архитектуры разработаны специально для работы в условиях сверх ограниченных ресурсов - инференс за адекватное время на CPU (несколько архитектур для разных SLA)</li>
-                            <li>Данный проект был выбран в качестве одного из лучших проектов среди студентов ПМИ ФКН НИУ ВШЭ за 2025 г</li>
-                        </ul>
-                        </p>
-                        <a href="https://github.com/vdoninav/hse_ocr_summ" target="_blank">GitHub</a>
-                        <a href="https://cs.hse.ru/cppr/best_projects/hse_app_document_ai" target="_blank"> HSE Best Project</a>
-                        <a href="https://drive.google.com/file/d/15s1vvJh0rRfqZ_qWpkAo9C-Rkl1l--Nh/view" target="_blank"> Report</a>
-                    </div>
-                    <!-- Карточка проекта 3 -->
-                    <div class="project-card">
+                    <div class="reg-card">
                         <h4>Стажировка в группе исследования новых методов ИБ в Яндекс Такси</h4>
-                        <h5><i>Первый индустриальный опыт</i></h5>
-                        <ul>
-                            <li>Разработан и внедрен алгоритм классификации на основе LLM, который уменьшил затраты человеческих ресурсов на 15%</li>
-                            <li>Применены передовые алгоритмы для решения задач дедупликации на основе BERT и графов</li>
-                            <li>Осуществлялась поддержка и оптимизация существующих бизнес-процессов</li>
-                        </ul>
+                        <div class="sub">Первый индустриальный опыт</div>
+                        <div class="body">
+                            <ul>
+                                <li>Разработан и внедрен алгоритм классификации на основе LLM, который уменьшил затраты
+                                    человеческих ресурсов на 15%</li>
+                                <li>Применены передовые алгоритмы для решения задач дедупликации на основе BERT и графов
+                                </li>
+                                <li>Осуществлялась поддержка и оптимизация существующих бизнес-процессов</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <br>
-                <div class="projects-grid">
-                    <!-- Карточка проекта 4 -->
-                    <div class="project-card">
+
+                <!-- Проекты -->
+                <div class="subsection-head" style="margin-top: 2rem;">
+                    <h3>Проекты</h3>
+                    <span class="count">4</span>
+                    <span class="rule"></span>
+                </div>
+
+                <div class="reg-grid">
+                    <div class="reg-card variant-proj">
+                        <h4>Распознавание и суммаризация документов в мобильном приложении HSE App X</h4>
+                        <div class="sub">Один из лучших проектов ПМИ 2025</div>
+                        <div class="body">
+                            <ul>
+                                <li>Разработаны и обучены суммаризаторы на основе самописных архитектур (вкл. RNN +
+                                    Attention) для внедрения в официальное приложение НИУ ВШЭ HSE App X и систему
+                                    электронного документооборота НИУ ВШЭ</li>
+                                <li>Архитектуры разработаны специально для работы в условиях сверх ограниченных ресурсов
+                                    — инференс за адекватное время на CPU (несколько архитектур для разных SLA)</li>
+                                <li>Данный проект был выбран в качестве одного из лучших проектов среди студентов ПМИ
+                                    ФКН НИУ ВШЭ за 2025 г.</li>
+                            </ul>
+                        </div>
+                        <div class="links">
+                            <a href="https://github.com/vdoninav/hse_ocr_summ" target="_blank" rel="noopener">GitHub</a>
+                            <a href="https://cs.hse.ru/cppr/best_projects/hse_app_document_ai" target="_blank"
+                                rel="noopener">HSE Best Project</a>
+                            <a href="https://drive.google.com/file/d/15s1vvJh0rRfqZ_qWpkAo9C-Rkl1l--Nh/view"
+                                target="_blank" rel="noopener">Report</a>
+                        </div>
+                    </div>
+                    <div class="reg-card variant-proj">
                         <h4>Исследование уголовных дел с помощью NER (Named Entity Recognition)</h4>
-                        <!-- <h5><i></i></h5> -->
-                        <p>
-                        <ul>
-                            <li>Обучена модель на основе BERT для извлечения ключевых слов из текстов судебных решений по определенной статье</li>
-                            <li>Развернуто интерактивное веб-приложение для удобства использования</li>
-                            <!-- <li></li> -->
-                        </ul>
-                        </p>
-                        <a href="https://github.com/vdoninav/hse_criminal_cases/" target="_blank">GitHub</a>
-                        <a href="https://hse-criminal-cases.streamlit.app/" target="_blank"> WebApp</a>
+                        <div class="body">
+                            <ul>
+                                <li>Обучена модель на основе BERT для извлечения ключевых слов из текстов судебных
+                                    решений по определенной статье</li>
+                                <li>Развернуто интерактивное веб-приложение для удобства использования</li>
+                            </ul>
+                        </div>
+                        <div class="links">
+                            <a href="https://github.com/vdoninav/hse_criminal_cases/" target="_blank"
+                                rel="noopener">GitHub</a>
+                            <a href="https://hse-criminal-cases.streamlit.app/" target="_blank"
+                                rel="noopener">WebApp</a>
+                        </div>
                     </div>
-                    <!-- Карточка проекта 5 -->
-                    <div class="project-card">
+                    <div class="reg-card variant-proj">
                         <h4>Real Estate Analysis</h4>
-                        <!-- <h5><i>Описание проекта 5</i></h5> -->
-                        <p>
-                        <ul>
-                            <li>Проведен анализ стоимости жилья в различных ценовых сегментах в зависимости от факторов, потенциально влияющих на стоимость</li>
-                            <!-- <li>Базовый анализ датасета, постановка гипотезы, её проверка на основе графиков</li> -->
-                            <li>Развернуто веб-приложение на Streamlit, сделан user-friendly интерфейс, нарисованы графики</li>
-                        </ul>
-                        </p>
-
-                        <a href="https://github.com/vdoninav/real_estate_analysis?tab=readme-ov-file" target="_blank">GitHub</a>
-                        <a href="https://vdoninav-real-estate-analysis.streamlit.app/" target="_blank"> WebApp</a>
+                        <div class="body">
+                            <ul>
+                                <li>Проведен анализ стоимости жилья в различных ценовых сегментах в зависимости от
+                                    факторов, потенциально влияющих на стоимость</li>
+                                <li>Развернуто веб-приложение на Streamlit, сделан user-friendly интерфейс, нарисованы
+                                    графики</li>
+                            </ul>
+                        </div>
+                        <div class="links">
+                            <a href="https://github.com/vdoninav/real_estate_analysis?tab=readme-ov-file"
+                                target="_blank" rel="noopener">GitHub</a>
+                            <a href="https://vdoninav-real-estate-analysis.streamlit.app/" target="_blank"
+                                rel="noopener">WebApp</a>
+                        </div>
                     </div>
-                    <!-- Карточка проекта 6 -->
-                    <div class="project-card">
+                    <div class="reg-card variant-proj">
                         <h4>Расширение «Словарь ударений»</h4>
-                        <!-- <h5><i>Описание проекта 6</i></h5> -->
-                        <p>
-                        <ul>
-                            <li>Написано расширение для браузера Chrome, которое автоматически подсвечивает русские слова на веб-страницах и показывает нормативное ударение во всплывающей подсказке</li>
-                            <li>Полностью open-source, добавляется и нативно работает с Google Chrome</li>
-                            <!-- <li>Инструкция по установке в README на GitHub</li> -->
-                        </ul>
-                        </p>
-                        <a href="https://github.com/vdoninav/stress_spotter_extension" target="_blank">GitHub</a>
+                        <div class="body">
+                            <ul>
+                                <li>Написано расширение для браузера Chrome, которое автоматически подсвечивает русские
+                                    слова на веб-страницах и показывает нормативное ударение во всплывающей подсказке
+                                </li>
+                                <li>Полностью open-source, добавляется и нативно работает с Google Chrome</li>
+                            </ul>
+                        </div>
+                        <div class="links">
+                            <a href="https://github.com/vdoninav/stress_spotter_extension" target="_blank"
+                                rel="noopener">GitHub</a>
+                        </div>
                     </div>
                 </div>
-            </section>
-
-            <!-- Контакты -->
-            <section id="contact">
-                <h2>Контакты</h2>
-                <div class="contact-info">
-                    <div class="contact-card">
-                        <h4>Email</h4>
-                        <p><a href="mailto:aleksei@vdonin.com" target="_blank">aleksei@vdonin.com</a></p>
-                    </div>
-                    <div class="contact-card">
-                        <h4>GitHub</h4>
-                        <p><a href="https://github.com/vdoninav" target="_blank">github.com/vdoninav</a></p>
-                    </div>
-                    <div class="contact-card">
-                        <h4>Telegram</h4>
-                        <p><a href="https://t.me/vdoninav" target="_blank">@vdoninav</a></p>
-                    </div>
-                    <div class="contact-card">
-                        <h4>LinkedIn</h4>
-                        <p><a href="https://www.linkedin.com/in/vdoninav/" target="_blank">
-                                linkedin.com/in/vdoninav/
-                            </a></p>
-                    </div>
+            </div>
+        </section>
+        <section id="contact" class="sec">
+            <div class="container">
+                <div class="sec-head">
+                    <h2>Контакты</h2>
+                    <span class="count">4</span>
+                    <span class="rule"></span>
                 </div>
-            </section>
-        </div>
+                <div class="contact-grid">
+                    <a class="contact-card" href="mailto:aleksei@vdonin.com">
+                        <div class="icon-wrap">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="4" width="20" height="16" rx="2" />
+                                <path d="M2 7l10 7 10-7" />
+                            </svg>
+                        </div>
+                        <span class="label">Email</span>
+                        <span class="value">aleksei@vdonin.com</span>
+                        <span class="arrow" aria-hidden="true">↗</span>
+                    </a>
+                    <a class="contact-card" href="https://t.me/vdoninav" target="_blank" rel="noopener">
+                        <div class="icon-wrap" style="color:#229ED9;">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                                <path
+                                    d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+                            </svg>
+                        </div>
+                        <span class="label">Telegram</span>
+                        <span class="value">@vdoninav</span>
+                        <span class="arrow" aria-hidden="true">↗</span>
+                    </a>
+                    <a class="contact-card" href="https://github.com/vdoninav" target="_blank" rel="noopener">
+                        <div class="icon-wrap" style="color:#181717;">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                                <path
+                                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                            </svg>
+                        </div>
+                        <span class="label">GitHub</span>
+                        <span class="value">github.com/vdoninav</span>
+                        <span class="arrow" aria-hidden="true">↗</span>
+                    </a>
+                    <a class="contact-card" href="https://www.linkedin.com/in/vdoninav/" target="_blank" rel="noopener">
+                        <div class="icon-wrap" style="color:#0A66C2;">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                        </div>
+                        <span class="label">LinkedIn</span>
+                        <span class="value">linkedin.com/in/vdoninav</span>
+                        <span class="arrow" aria-hidden="true">↗</span>
+                    </a>
+                </div>
+            </div>
+        </section>
     </main>
-
-    <!-- Подвал сайта -->
-    <footer>
-        <p>&copy; Вдонин А.В., 2025. Все права защищены.</p>
+    <footer class="site-footer">
+        <div class="container">
+            <span>© Вдонин А.В., 2026. Все права защищены.</span>
+            <span class="meta"><em class="grad-text">Vdonin</em>.com</span>
+        </div>
     </footer>
+    <script>
+        (function () {
+            var sections = document.querySelectorAll('section[id]');
+            var links = document.querySelectorAll('.site-header nav a[href^="#"]');
+            if (!sections.length || !links.length || !('IntersectionObserver' in window)) return;
+
+            var linkById = {};
+            links.forEach(function (a) {
+                var id = a.getAttribute('href').slice(1);
+                linkById[id] = a;
+            });
+
+            var setActive = function (id) {
+                links.forEach(function (a) {
+                    a.classList.remove('active');
+                    a.removeAttribute('aria-current');
+                });
+                if (linkById[id]) {
+                    linkById[id].classList.add('active');
+                    linkById[id].setAttribute('aria-current', 'location');
+                }
+            };
+
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) setActive(entry.target.id);
+                });
+            }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+
+            sections.forEach(function (s) { observer.observe(s); });
+        })();
+    </script>
 </body>
 
 </html>
