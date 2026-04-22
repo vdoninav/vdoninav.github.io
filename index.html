@@ -172,6 +172,16 @@
             border-bottom-color: #7c3aed;
         }
 
+        .site-header nav a:focus-visible,
+        .hero .cta:focus-visible,
+        .feat-card .links a:focus-visible,
+        .reg-card .links a:focus-visible,
+        .contact-card:focus-visible {
+            outline: 2px solid #7c3aed;
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
         @media (max-width: 800px) {
             .site-header .container {
                 padding-top: 0.75rem;
@@ -989,7 +999,7 @@
         </div>
     </section>
     <main>
-        <section class="about">
+        <section id="about" class="about">
             <div class="container">
                 <div class="photo-ring">
                     <img class="photo" src="main_photo.jpg" alt="Алексей Вдонин" />
@@ -1142,7 +1152,7 @@
                         инструменты под конкретные задачи и внедряю технологии, улучшающие качество, производительность
                         и надежность решений.</p>
                     <div class="links">
-                        <a href="https://t.me/vdoninav" target="_blank" rel="noopener">Связаться со мной →</a>
+                        <a href="https://t.me/vdoninav" target="_blank" rel="noopener">Связаться со мной <span aria-hidden="true">→</span></a>
                     </div>
                 </div>
 
