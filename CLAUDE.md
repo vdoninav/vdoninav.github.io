@@ -27,6 +27,7 @@ Supporting files:
 - `thumbs/` — favicons, `apple-touch-icon`, and `site.webmanifest`. Linked from the `<head>`.
 - `RELEASE_NOTES.md` — human-readable changelog maintained per version.
 - `README.md` — minimal pointer to the live site.
+- `docs/superpowers/specs/` and `docs/superpowers/plans/` — dated design specs and implementation plans from past redesigns. Check here before starting new design work.
 
 ## Content Conventions
 
