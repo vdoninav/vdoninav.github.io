@@ -1,3 +1,7 @@
 .superpowers/
 .claude/
 .DS_Store
+
+# Local-only files: the original CV export contains a phone number
+/Vdonin-CV-V*.pdf
+/.gitconfig-pers

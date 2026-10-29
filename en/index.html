@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0b0e14" />
+    <title>Aleksei Vdonin — ML Engineer</title>
+    <meta name="description"
+        content="Aleksei Vdonin — ML Engineer / Research Engineer. NLP models: embeddings, rerankers, text classification, LLMs. Teaching deep learning at HSE FCS." />
+    <link rel="canonical" href="https://vdonin.com/en/" />
+    <link rel="alternate" hreflang="ru" href="https://vdonin.com/" />
+    <link rel="alternate" hreflang="en" href="https://vdonin.com/en/" />
+    <link rel="alternate" hreflang="x-default" href="https://vdonin.com/" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content="Aleksei Vdonin — ML Engineer" />
+    <meta property="og:description"
+        content="ML Engineer / Research Engineer. NLP models, LLMs, full-cycle ML development. Teaching DL at HSE FCS." />
+    <meta property="og:url" content="https://vdonin.com/en/" />
+    <meta property="og:image" content="https://vdonin.com/main_photo.jpg" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="ru_RU" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../thumbs/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../thumbs/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../thumbs/favicon-16x16.png" />
+    <link rel="manifest" href="../thumbs/site.webmanifest" />
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Aleksei Vdonin",
+        "alternateName": "Алексей Вдонин",
+        "jobTitle": "ML Engineer / Research Engineer",
+        "url": "https://vdonin.com/",
+        "email": "mailto:aleksei@vdonin.com",
+        "image": "https://vdonin.com/main_photo.jpg",
+        "address": { "@type": "PostalAddress", "addressLocality": "Moscow", "addressCountry": "RU" },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "HSE University" },
+        "sameAs": [
+            "https://github.com/vdoninav",
+            "https://www.linkedin.com/in/vdoninav/",
+            "https://t.me/vdoninav"
+        ]
+    }
+    </script>
+    <!-- Theme: dark by default; a saved choice is applied before first paint -->
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('theme');
+                if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+            } catch (e) { }
+        })();
+    </script>
+    <style>
+        /* ===== Design tokens (dark-first) ===== */
+        :root {
+            color-scheme: dark;
+            --bg: #0b0e14;
+            --bg-elev: #10141c;
+            --line: #1f2633;
+            --line-strong: #2d3644;
+            --text: #e6e9ee;
+            --text-2: #a9b2bf;
+            --text-3: #7d8898;
+            --accent: #6ea8fe;
+            --accent-hover: #8dbcff;
+            --accent-ink: #0b0e14;
+            --focus: #9cc4ff;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+        }
+
+        :root[data-theme="light"] {
+            color-scheme: light;
+            --bg: #ffffff;
+            --bg-elev: #f6f8fa;
+            --line: #e3e7ec;
+            --line-strong: #cbd3dc;
+            --text: #121820;
+            --text-2: #475262;
+            --text-3: #66717f;
+            --accent: #1f5fd1;
+            --accent-hover: #174cab;
+            --accent-ink: #ffffff;
+            --focus: #1f5fd1;
+        }
+
+        /* ===== Reset ===== */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        section {
+            scroll-margin-top: 64px;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--focus);
+            outline-offset: 2px;
+        }
+
+        .mono {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            letter-spacing: 0.02em;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .skip {
+            position: absolute;
+            left: 1rem;
+            top: -3rem;
+            z-index: 100;
+            padding: 0.5rem 0.75rem;
+            background: var(--accent);
+            color: var(--accent-ink);
+            border-radius: 4px;
+        }
+
+        .skip:focus {
+            top: 1rem;
+        }
+
+        /* ===== Header ===== */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: var(--bg);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .site-header .container {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            min-height: 56px;
+        }
+
+        .wordmark {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: var(--text);
+        }
+
+        .site-header nav {
+            margin-left: auto;
+        }
+
+        .site-header nav ul {
+            display: flex;
+            gap: 1.25rem;
+            font-size: 0.9rem;
+        }
+
+        .site-header nav a {
+            display: inline-block;
+            color: var(--text-2);
+            padding: 2px 0;
+            border-bottom: 1px solid transparent;
+            transition: color 0.15s, border-color 0.15s;
+        }
+
+        .site-header nav a:hover {
+            color: var(--text);
+        }
+
+        .site-header nav a.active {
+            color: var(--text);
+            border-bottom-color: var(--accent);
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .lang {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            padding: 0 10px;
+            border: 1px solid var(--line-strong);
+            border-radius: 4px;
+            color: var(--text-2);
+            transition: color 0.15s, border-color 0.15s;
+        }
+
+        .lang:hover {
+            color: var(--text);
+            border-color: var(--accent);
+        }
+
+        .theme-toggle {
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--line-strong);
+            border-radius: 4px;
+            background: transparent;
+            color: var(--text-2);
+            cursor: pointer;
+            transition: color 0.15s, border-color 0.15s;
+        }
+
+        .theme-toggle:hover {
+            color: var(--text);
+            border-color: var(--accent);
+        }
+
+        .theme-toggle svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        :root[data-theme="light"] .icon-sun {
+            display: none;
+        }
+
+        :root:not([data-theme="light"]) .icon-moon {
+            display: none;
+        }
+
+        @media (max-width: 720px) {
+            .site-header .container {
+                flex-wrap: wrap;
+                row-gap: 0.4rem;
+                padding-top: 0.6rem;
+                padding-bottom: 0.6rem;
+                min-height: 0;
+            }
+
+            .controls {
+                margin-left: auto;
+            }
+
+            .site-header nav {
+                order: 3;
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .site-header nav ul {
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: 0.4rem 0.5rem;
+                font-size: 0.8rem;
+            }
+
+            section {
+                scroll-margin-top: 100px;
+            }
+        }
+
+        @media (max-width: 340px) {
+            section {
+                scroll-margin-top: 128px;
+            }
+        }
+
+        /* ===== Hero / Profile ===== */
+        .hero {
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .eyebrow {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 1.25rem;
+        }
+
+        .lead {
+            font-size: 1.08rem;
+            color: var(--text-2);
+            max-width: 62ch;
+            margin-bottom: 1.5rem;
+        }
+
+        .actions {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 14px;
+            border: 1px solid var(--line-strong);
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text);
+            transition: border-color 0.15s, background 0.15s, color 0.15s;
+        }
+
+        .btn:hover {
+            border-color: var(--accent);
+        }
+
+        .btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--accent-ink);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            border-color: var(--accent-hover);
+        }
+
+        .facts {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            border-top: 1px solid var(--line);
+            padding-top: 1.25rem;
+        }
+
+        .facts dt {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-3);
+            margin-bottom: 0.25rem;
+        }
+
+        .facts dd {
+            font-size: 0.9rem;
+            line-height: 1.45;
+        }
+
+        .facts dd + dd {
+            margin-top: 0.3rem;
+            color: var(--text-2);
+        }
+
+        .hero-photo img {
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            object-position: 35% center;
+            border-radius: 6px;
+            border: 1px solid var(--line-strong);
+        }
+
+        @media (max-width: 760px) {
+            .hero {
+                padding: 2.5rem 0 2rem;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .hero-photo {
+                order: -1;
+            }
+
+            .hero-photo img {
+                width: 112px;
+                height: 112px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .facts {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+        }
+
+        /* ===== Sections ===== */
+        .sec {
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .sec-head {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .sec-head .num {
+            color: var(--accent);
+        }
+
+        .sec-head h2 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .sub-head {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-3);
+            margin: 2rem 0 0.75rem;
+        }
+
+        /* ===== Skills ===== */
+        .skills .row {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 1rem;
+            padding: 0.9rem 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .skills .row:last-child {
+            border-bottom: 1px solid var(--line);
+        }
+
+        .skills dt {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-3);
+            padding-top: 0.45rem;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .tags li {
+            font-size: 0.85rem;
+            padding: 4px 10px;
+            border: 1px solid var(--line-strong);
+            border-radius: 4px;
+            background: var(--bg-elev);
+        }
+
+        @media (max-width: 600px) {
+            .skills .row {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+        }
+
+        /* ===== Timeline (experience + education) ===== */
+        .timeline>li {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .timeline>li:last-child {
+            border-bottom: 1px solid var(--line);
+        }
+
+        .when {
+            color: var(--text-3);
+            padding-top: 0.3rem;
+        }
+
+        .when .current {
+            display: flex;
+            width: max-content;
+            align-items: center;
+            gap: 6px;
+            margin-top: 0.5rem;
+            color: var(--accent);
+        }
+
+        .when .current::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .what h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            line-height: 1.35;
+        }
+
+        .org {
+            color: var(--text-2);
+            font-size: 0.92rem;
+            margin: 0.15rem 0 0.75rem;
+        }
+
+        .bullets li {
+            position: relative;
+            padding-left: 1.1rem;
+            color: var(--text-2);
+            font-size: 0.95rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .bullets li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.75em;
+            width: 6px;
+            height: 1px;
+            background: var(--text-3);
+        }
+
+        .note {
+            margin-top: 0.75rem;
+            font-size: 0.78rem;
+            line-height: 1.45;
+            color: var(--text-3);
+        }
+
+        .achievements li {
+            position: relative;
+            padding-left: 1.1rem;
+            color: var(--text-2);
+            font-size: 0.95rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .achievements li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.75em;
+            width: 6px;
+            height: 1px;
+            background: var(--text-3);
+        }
+
+        @media (max-width: 600px) {
+            .timeline>li {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+                padding: 1.25rem 0;
+            }
+        }
+
+        /* ===== Projects ===== */
+        .proj-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .proj {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 1.25rem;
+            background: var(--bg-elev);
+        }
+
+        .proj.wide {
+            grid-column: 1 / -1;
+        }
+
+        .proj .kicker {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .proj h3 {
+            font-size: 1.02rem;
+            font-weight: 600;
+            line-height: 1.35;
+            margin-bottom: 0.6rem;
+        }
+
+        .proj .bullets {
+            flex: 1;
+        }
+
+        .proj .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--line);
+        }
+
+        .proj .links a {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--accent);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .proj .links a:hover {
+            color: var(--accent-hover);
+        }
+
+        @media (max-width: 700px) {
+            .proj-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== Interests ===== */
+        .interests {
+            color: var(--text-2);
+            font-size: 0.95rem;
+            max-width: 62ch;
+        }
+
+        /* ===== Contacts ===== */
+        .contacts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--line);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .contacts li.wide {
+            grid-column: 1 / -1;
+        }
+
+        .contacts a {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            height: 100%;
+            padding: 1rem 1.1rem;
+            background: var(--bg-elev);
+            transition: background 0.15s;
+        }
+
+        .contacts a:hover {
+            background: var(--bg);
+        }
+
+        .contacts a:focus-visible {
+            outline-offset: -3px;
+            background: var(--bg);
+        }
+
+        .contacts svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            color: var(--text-2);
+        }
+
+        .contacts .label {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-3);
+        }
+
+        .contacts .val {
+            font-size: 0.92rem;
+            word-break: break-all;
+        }
+
+        .contacts a:hover .val {
+            color: var(--accent);
+        }
+
+        @media (max-width: 600px) {
+            .contacts {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== Footer ===== */
+        .site-footer {
+            padding: 1.5rem 0 2rem;
+            font-size: 0.82rem;
+            color: var(--text-3);
+        }
+
+        .site-footer .container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+        }
+
+        .site-footer a:hover {
+            color: var(--text);
+        }
+
+        /* ===== Responsive base ===== */
+        @media (max-width: 760px) {
+            .container {
+                padding: 0 1.25rem;
+            }
+
+            .sec {
+                padding: 2.25rem 0;
+            }
+        }
+
+        /* ===== Reduced motion ===== */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.001ms !important;
+            }
+        }
+
+        /* ===== Print ===== */
+        @media print {
+            :root {
+                color-scheme: light;
+                --bg: #ffffff;
+                --bg-elev: #ffffff;
+                --line: #d9dee5;
+                --line-strong: #c4ccd5;
+                --text: #111111;
+                --text-2: #333333;
+                --text-3: #555555;
+                --accent: #1f5fd1;
+                --accent-ink: #ffffff;
+            }
+
+            .site-header,
+            .skip,
+            .actions {
+                display: none;
+            }
+
+            .proj-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .proj .links a::after {
+                content: " (" attr(href) ")";
+                word-break: break-all;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+        <div class="container">
+            <a class="wordmark" href="#top">vdonin.com</a>
+            <nav aria-label="Main navigation">
+                <ul>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="controls">
+                <a class="lang" href="../" hreflang="ru" lang="ru" aria-label="RU — Переключить на русский">RU</a>
+                <button class="theme-toggle" type="button" aria-label="Switch to light theme"
+                    data-label-to-light="Switch to light theme" data-label-to-dark="Switch to dark theme">
+                    <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4" />
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+                    </svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main">
+        <section class="hero" id="top">
+            <div class="container hero-grid">
+                <div class="hero-text">
+                    <p class="eyebrow mono">ML Engineer / Research&nbsp;Engineer&nbsp;·&nbsp;Moscow</p>
+                    <h1>Aleksei Vdonin</h1>
+                    <p class="lead">I build and ship NLP models: embeddings, rerankers, text classification and LLMs. I
+                        work across the full ML development cycle, from data preparation and training to evaluation and
+                        integration into production services. I also teach deep learning at the HSE Faculty of Computer
+                        Science.</p>
+                    <div class="actions">
+                        <a class="btn btn-primary" href="https://t.me/vdoninav" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M22 2 11 13" />
+                                <path d="M22 2 15 22l-4-9-9-4 20-7z" />
+                            </svg>
+                            Message on Telegram
+                        </a>
+                        <a class="btn" href="../cv/Aleksei_Vdonin_CV.pdf" download="Aleksei_Vdonin_CV.pdf">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <path d="M14 2v6h6M12 18v-6M9 15l3 3 3-3" />
+                            </svg>
+                            Download CV
+                        </a>
+                    </div>
+                    <dl class="facts">
+                        <div>
+                            <dt>Current role</dt>
+                            <dd>Research Engineer, Machine Learning &amp; Anti-Spam team</dd>
+                        </div>
+                        <div>
+                            <dt>Teaching</dt>
+                            <dd>Deep learning seminars, HSE Faculty of Computer Science</dd>
+                        </div>
+                        <div>
+                            <dt>Education</dt>
+                            <dd>HSE University, FCS — BSc in Applied Mathematics and Computer Science</dd>
+                            <dd>MSc in Data Science, 2026&#8288;–&#8288;2028</dd>
+                        </div>
+                    </dl>
+                </div>
+                <figure class="hero-photo">
+                    <img src="../main_photo.jpg" alt="Aleksei Vdonin" width="220" height="220" />
+                </figure>
+            </div>
+        </section>
+
+        <section id="skills" class="sec">
+            <div class="container">
+                <header class="sec-head">
+                    <span class="num mono" aria-hidden="true">01</span>
+                    <h2>Skills</h2>
+                </header>
+                <dl class="skills">
+                    <div class="row">
+                        <dt>Languages</dt>
+                        <dd>
+                            <ul class="tags">
+                                <li>Python</li>
+                                <li>C++</li>
+                                <li>SQL</li>
+                                <li>YQL</li>
+                            </ul>
+                        </dd>
+                    </div>
+                    <div class="row">
+                        <dt>ML / DL</dt>
+                        <dd>
+                            <ul class="tags">
+                                <li>ML / DL (NLP, CV)</li>
+                                <li>PyTorch</li>
+                                <li>vLLM</li>
+                                <li>Multi-GPU workflow</li>
+                            </ul>
+                        </dd>
+                    </div>
+                    <div class="row">
+                        <dt>Data</dt>
+                        <dd>
+                            <ul class="tags">
+                                <li>NumPy</li>
+                                <li>scikit-learn</li>
+                                <li>Pandas</li>
+                                <li>Polars</li>
+                                <li>YTsaurus</li>
+                                <li>PostgreSQL</li>
+                            </ul>
+                        </dd>
+                    </div>
+                    <div class="row">
+                        <dt>Tools</dt>
+                        <dd>
+                            <ul class="tags">
+                                <li>Git</li>
+                                <li>Linux</li>
+                                <li>Jupyter</li>
+                                <li>Claude Code</li>
+                            </ul>
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </section>
+
+        <section id="experience" class="sec">
+            <div class="container">
+                <header class="sec-head">
+                    <span class="num mono" aria-hidden="true">02</span>
+                    <h2>Experience</h2>
+                </header>
+                <ol class="timeline">
+                    <li>
+                        <div class="when mono">
+                            March&nbsp;2026&nbsp;— present
+                            <span class="current">Current position</span>
+                        </div>
+                        <div class="what">
+                            <h3>Research Engineer</h3>
+                            <p class="org">Machine Learning &amp; Anti-Spam team</p>
+                            <ul class="bullets">
+                                <li>Shipped embedding-size optimizations to the search service</li>
+                                <li>Built the MVP of a new product</li>
+                                <li>Trained a range of modified reranker models</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="when mono">
+                            September&nbsp;2026&nbsp;— present
+                            <span class="current">Current position</span>
+                        </div>
+                        <div class="what">
+                            <h3>Deep Learning Instructor</h3>
+                            <p class="org">HSE University, Faculty of Computer Science</p>
+                            <ul class="bullets">
+                                <li>Teaching deep learning seminars to third-year students of the Applied Mathematics
+                                    and Computer Science program and the Economics and Data Analysis program</li>
+                                <li>Covering both the fundamentals of deep learning and an in-depth treatment of attention
+                                    mechanisms and transformer architectures</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="when mono">February&nbsp;2025&nbsp;— March&nbsp;2026</div>
+                        <div class="what">
+                            <h3>Analyst-Developer</h3>
+                            <p class="org">Yandex Alice ethics team</p>
+                            <ul class="bullets">
+                                <li>Developed and deployed ethics classifiers that raised the baseline quality of Alice's
+                                    responses</li>
+                                <li>Ran acceptance testing of new foundation models, evaluating the ethical quality of
+                                    their responses with state-of-the-art methods</li>
+                                <li>Introduced LLMs into existing processes, substantially reducing the person-hours
+                                    required</li>
+                                <li>Built numerous reusable tools and materials</li>
+                            </ul>
+                            <p class="note">All tasks are described in deliberately abstract terms to comply strictly with
+                                the NDA: nothing that could even potentially fall under it is disclosed.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="when mono">September&nbsp;2024&nbsp;— February&nbsp;2025</div>
+                        <div class="what">
+                            <h3>Analyst Intern</h3>
+                            <p class="org">Emerging Information Security Methods Research group, Yandex Taxi</p>
+                            <ul class="bullets">
+                                <li>Developed and deployed an LLM-based classification algorithm that reduced manual
+                                    workload by 15%</li>
+                                <li>Applied state-of-the-art BERT- and graph-based methods to deduplication tasks</li>
+                                <li>Supported and optimized existing business processes</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="education" class="sec">
+            <div class="container">
+                <header class="sec-head">
+                    <span class="num mono" aria-hidden="true">03</span>
+                    <h2>Education</h2>
+                </header>
+                <ol class="timeline">
+                    <li>
+                        <div class="when mono">2026&nbsp;—&nbsp;2028</div>
+                        <div class="what">
+                            <h3>Master's degree — Data Science</h3>
+                            <p class="org">HSE University, Faculty of Computer Science, Moscow</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="when mono">2022&nbsp;—&nbsp;2026</div>
+                        <div class="what">
+                            <h3>Bachelor's degree — Applied Mathematics and Computer Science</h3>
+                            <p class="org">HSE University, Faculty of Computer Science, Moscow</p>
+                        </div>
+                    </li>
+                </ol>
+                <h3 class="sub-head">Achievements</h3>
+                <ul class="achievements">
+                    <li>Finalist of the All-Russian Olympiad of School Students in Physics</li>
+                    <li>Prize-winner of the HSE University student olympiad "Higher League" in Applied Mathematics and
+                        Computer Science (fourth year of the Bachelor's program)</li>
+                    <li>Gold medalist of the International Experimental Physics Olympiad (IEPhO)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="projects" class="sec">
+            <div class="container">
+                <header class="sec-head">
+                    <span class="num mono" aria-hidden="true">04</span>
+                    <h2>Projects</h2>
+                </header>
+                <div class="proj-grid">
+                    <article class="proj wide">
+                        <p class="kicker mono">Bachelor's thesis</p>
+                        <h3>Unifying Tokenization: Finding the Optimal Strategy for Time Series</h3>
+                        <ul class="bullets">
+                            <li>Built a PyTorch framework for comparing five time-series tokenization strategies on a
+                                shared Transformer backbone</li>
+                            <li>Ran 90 experiments totaling 230 GPU-hours: three datasets, two forecasting horizons,
+                                three random seeds</li>
+                            <li>Compared MAE / RMSE, training and inference time, GPU memory consumption and result
+                                stability</li>
+                            <li>Automated the experiments, metric collection and analysis of accuracy-versus-compute
+                                trade-offs</li>
+                        </ul>
+                        <p class="links">
+                            <a href="https://github.com/vdoninav/tokenization_unification" target="_blank"
+                                rel="noopener">GitHub</a>
+                            <a href="https://github.com/vdoninav/tokenization_unification/blob/main/vdonin_av_unifikaciya-tokenizacii-poisk-optimalnoy-strategii-dlya-modeley-vremennyh-ryadov_347808.pdf"
+                                target="_blank" rel="noopener">Thesis (PDF, in Russian)</a>
+                        </p>
+                    </article>
+                    <article class="proj wide">
+                        <p class="kicker mono">One of the best student projects of 2025 · HSE FCS</p>
+                        <h3>Document Recognition and Summarization in the HSE App X Mobile Application</h3>
+                        <ul class="bullets">
+                            <li>Designed and trained summarizers based on custom architectures (including RNN +
+                                Attention) for integration into HSE University's official app, HSE App X, and the
+                                university's electronic document management system</li>
+                            <li>Architectures were built for severely constrained environments: CPU inference within
+                                acceptable time (several architectures for different SLAs)</li>
+                            <li>Selected as one of the best projects among Applied Mathematics and Computer Science
+                                students at HSE FCS in 2025</li>
+                        </ul>
+                        <p class="links">
+                            <a href="https://github.com/vdoninav/hse_ocr_summ" target="_blank" rel="noopener">GitHub</a>
+                            <a href="https://cs.hse.ru/cppr/best_projects/hse_app_document_ai" target="_blank"
+                                rel="noopener">HSE website</a>
+                            <a href="https://drive.google.com/file/d/15s1vvJh0rRfqZ_qWpkAo9C-Rkl1l--Nh/view"
+                                target="_blank" rel="noopener">Report</a>
+                        </p>
+                    </article>
+                    <article class="proj">
+                        <p class="kicker mono">NLP · NER</p>
+                        <h3>Criminal Case Research with Named Entity Recognition (NER)</h3>
+                        <ul class="bullets">
+                            <li>Developed and trained a BERT-based model to extract key terms from court decisions
+                                issued under a specific article of the criminal code</li>
+                            <li>Deployed an interactive web application for convenient use</li>
+                        </ul>
+                        <p class="links">
+                            <a href="https://github.com/vdoninav/hse_criminal_cases/" target="_blank"
+                                rel="noopener">GitHub</a>
+                            <a href="https://hse-criminal-cases.streamlit.app/" target="_blank"
+                                rel="noopener">Web app</a>
+                        </p>
+                    </article>
+                    <article class="proj">
+                        <p class="kicker mono">DL · Transformer</p>
+                        <h3>DE → EN Translator on a Transformer Architecture, Written from Scratch</h3>
+                        <ul class="bullets">
+                            <li>Implemented a Transformer model using basic PyTorch primitives</li>
+                            <li>Trained on a single A100 with Weights &amp; Biases logging and checkpointing</li>
+                            <li>Ran dozens of experiments</li>
+                        </ul>
+                        <p class="links">
+                            <a href="https://api.wandb.ai/links/vdoninav-hse/1pu6nm7d" target="_blank"
+                                rel="noopener">W&amp;B Report</a>
+                        </p>
+                    </article>
+                    <article class="proj wide">
+                        <p class="kicker mono">Side project · linguistics</p>
+                        <h3>"Stress Dictionary" Browser Extension</h3>
+                        <ul class="bullets">
+                            <li>A Chrome extension that automatically highlights Russian words on web pages and shows
+                                their standard stress in a tooltip</li>
+                            <li>Fully open source; installs and runs natively in Google Chrome</li>
+                        </ul>
+                        <p class="links">
+                            <a href="https://github.com/vdoninav/stress_spotter_extension" target="_blank"
+                                rel="noopener">GitHub</a>
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="interests" class="sec">
+            <div class="container">
+                <header class="sec-head">
+                    <span class="num mono" aria-hidden="true">05</span>
+                    <h2>Interests</h2>
+                </header>
+                <p class="interests">Padel, IPSC practical shooting, track driving (MRW), deep learning pet projects.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="sec">
+            <div class="container">
+                <header class="sec-head">
+                    <span class="num mono" aria-hidden="true">06</span>
+                    <h2>Contact</h2>
+                </header>
+                <ul class="contacts">
+                    <li>
+                        <a href="mailto:aleksei@vdonin.com">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="4" width="20" height="16" rx="2" />
+                                <path d="M2 7l10 7 10-7" />
+                            </svg>
+                            <span>
+                                <span class="label">Email</span>
+                                <span class="val">aleksei@vdonin.com</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://t.me/vdoninav" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                                <path
+                                    d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+                            </svg>
+                            <span>
+                                <span class="label">Telegram</span>
+                                <span class="val">@vdoninav</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/vdoninav" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                                <path
+                                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                            </svg>
+                            <span>
+                                <span class="label">GitHub</span>
+                                <span class="val">github.com/vdoninav</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/in/vdoninav/" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                            <span>
+                                <span class="label">LinkedIn</span>
+                                <span class="val">linkedin.com/in/vdoninav</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="wide">
+                        <a href="../cv/Aleksei_Vdonin_CV.pdf" download="Aleksei_Vdonin_CV.pdf">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <path d="M14 2v6h6M12 18v-6M9 15l3 3 3-3" />
+                            </svg>
+                            <span>
+                                <span class="label">CV</span>
+                                <span class="val">Download CV (in Russian)</span>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <span>© Aleksei Vdonin, 2026. All rights reserved.</span>
+            <span><a href="../" hreflang="ru" lang="ru">Русская версия</a> · <span class="mono">vdonin.com</span></span>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            /* ---- Theme toggle ---- */
+            var root = document.documentElement;
+            var btn = document.querySelector('.theme-toggle');
+            var meta = document.querySelector('meta[name="theme-color"]');
+
+            function isLight() {
+                return root.getAttribute('data-theme') === 'light';
+            }
+
+            function applyLabel() {
+                if (!btn) return;
+                var label = isLight() ? btn.getAttribute('data-label-to-dark') : btn.getAttribute('data-label-to-light');
+                btn.setAttribute('aria-label', label);
+                btn.setAttribute('title', label);
+                if (meta) meta.setAttribute('content', isLight() ? '#ffffff' : '#0b0e14');
+            }
+
+            if (btn) {
+                btn.addEventListener('click', function () {
+                    var next = isLight() ? 'dark' : 'light';
+                    root.setAttribute('data-theme', next);
+                    try { localStorage.setItem('theme', next); } catch (e) { }
+                    applyLabel();
+                });
+                applyLabel();
+            }
+
+            /* ---- Scrollspy for the navigation ---- */
+            var links = document.querySelectorAll('.site-header nav a[href^="#"]');
+            var linkById = {};
+            links.forEach(function (a) {
+                linkById[a.getAttribute('href').slice(1)] = a;
+            });
+            var sections = Array.prototype.filter.call(
+                document.querySelectorAll('main section[id]'),
+                function (s) { return linkById[s.id]; }
+            );
+            if (!sections.length || !links.length) return;
+
+            function setActive(id) {
+                links.forEach(function (a) {
+                    a.classList.remove('active');
+                    a.removeAttribute('aria-current');
+                });
+                if (id && linkById[id]) {
+                    linkById[id].classList.add('active');
+                    linkById[id].setAttribute('aria-current', 'location');
+                }
+            }
+
+            /* Active = last linked section whose top has passed 35% of the viewport;
+               at the very bottom of the page the last section wins. */
+            var ticking = false;
+            function update() {
+                ticking = false;
+                var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+                var line = window.innerHeight * 0.35;
+                var current = null;
+                if (atBottom) {
+                    current = sections[sections.length - 1].id;
+                } else {
+                    for (var i = 0; i < sections.length; i++) {
+                        if (sections[i].getBoundingClientRect().top <= line) current = sections[i].id;
+                    }
+                }
+                setActive(current);
+            }
+            function schedule() {
+                if (!ticking) {
+                    ticking = true;
+                    window.requestAnimationFrame(update);
+                }
+            }
+            window.addEventListener('scroll', schedule, { passive: true });
+            window.addEventListener('resize', schedule);
+            update();
+        })();
+    </script>
+</body>
+
+</html>

@@ -1,3 +1,44 @@
+# Release Notes v3.0 — October 29, 2026
+
+## Overview
+Strict, professional redesign with a dark theme on by default, content synchronised with CV v3.6, and a full English version of the site. Still a static GitHub Pages site: plain HTML, inline CSS, a small inline script, no build step.
+
+## Main Changes
+
+### New visual language
+- Dark-first design tokens (`--bg`, `--text`, `--accent`, …) with a complete light palette under `:root[data-theme="light"]`. One accent colour (blue) replaces the purple→cyan gradient.
+- Removed: gradient text, background blobs, pulsing badge, hover lifts, frosted glass. Flat 1px borders, 4–6px radii, no shadows.
+- System monospace is used for labels, dates, section numbers and small links; system sans for prose. Still no web fonts and no external requests.
+- Theme toggle (sun/moon) in the header. Dark is the default; the visitor's choice is stored in `localStorage` and applied before first paint.
+
+### Second language
+- New `en/index.html` with the same markup and styles and fully translated content. a link to the other language in the header (EN / RU) and the footer (English version / Русская версия), `hreflang` alternates, `og:locale`, translated `<title>`/description.
+
+### Content updates (from CV v3.6)
+- **Profile** rewritten: ML Engineer / Research Engineer; NLP models (embeddings, rerankers, text classification, LLMs); full ML cycle; teaching DL at HSE FCS. Three key facts under the actions; the Образование fact leads with the degree, «ФКН НИУ ВШЭ — бакалавриат „Прикладная математика и информатика“», followed by the Master's.
+- **Actions:** "Написать в Telegram" and "Скачать CV" (links to `cv/Aleksei_Vdonin_CV.pdf`).
+- **Skills** now follow the CV in four rows: Языки (Python, C++, SQL, YQL), ML / DL (ML/DL NLP+CV, PyTorch, vLLM, Multi-GPU workflow), Данные (NumPy, scikit-learn, Pandas, Polars, YTsaurus, PostgreSQL), Инструменты (Git, Linux, Jupyter, Claude Code). Dropped: CI/CD, CLI, Hadoop, Spark, S3.
+- **Experience** is a dated timeline of four entries: Разработчик-исследователь, команда ML и антиспама (Mar 2026 –, three concrete bullets); Преподаватель по DL, ФКН НИУ ВШЭ (Sep 2026 –, new); Аналитик-разработчик, команда этики Яндекс Алисы (Feb 2025 – Mar 2026, NDA note kept); Стажёр-аналитик, Яндекс Такси (Sep 2024 – Feb 2025).
+- **Education** adds the Master's (Науки о данных, ФКН, 2026–2028) above the Bachelor's (ПМИ, 2022–2026). Achievements follow the CV: ВСОШ physics final, «Высшая лига» prize, IEPhO gold. Dropped: ICPC, "many olympiad prizes", the «Машинное обучение и приложения» specialization line.
+- **Projects** are the CV's five: thesis on time-series tokenization (new, full-width card, GitHub + PDF), HSE App X (full-width), criminal-cases NER and DE→EN Transformer translator (new, W&B report) side by side, «Словарь ударений» (full-width). Dropped: Real Estate Analysis.
+- **Interests** section added (padel, IPSC, track driving, DL pet projects).
+- **Contacts** gain a CV row; the phone number from the CV is deliberately not published.
+
+### Navigation
+- Nav is now Навыки / Опыт / Образование / Проекты / Контакты. Anchors: `#skills`, `#experience`, `#education`, `#projects`, `#interests`, `#contact` (`#projects` kept for old links).
+
+### Assets
+- `main_photo.jpg` recompressed from 6.4 MB to 474 KB.
+- `thumbs/site.webmanifest` gets a name, correct relative icon paths and the dark theme colour.
+
+## Technical Details
+- Two HTML files (`index.html`, `en/index.html`) with identical `<style>` and `<script>` blocks; content differs only. Keep them in sync.
+- Inline script (~80 lines): theme bootstrap in `<head>`, toggle handler (updates `data-theme`, `localStorage`, `aria-label`, `meta[name=theme-color]`), scroll-position scrollspy (rAF-throttled; Контакты stays active at the bottom of the page).
+- Breakpoints: 900px, 760px, 720px, 700px, 600px, 340px. Verified at 320 / 390 / 768 / 1024 / 1440 px in both themes.
+- Skip link, `:focus-visible` rings, `aria-current` on the active nav link, reduced-motion support, print stylesheet, JSON-LD `Person` schema.
+
+---
+
 # Release Notes v2.0 — April 21, 2026
 
 ## Overview
